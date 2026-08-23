@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://noira-crm.pages.dev"),
   title: "NOIRA — CRM com IA para vender por conversas",
   description: "Organize conversas, automatize seu funil e venda mais com a inteligência artificial da NOIRA.",
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: { icon: "/noira-logo.jfif", shortcut: "/noira-logo.jfif", apple: "/noira-logo.jfif" },
   openGraph: {
     title: "NOIRA — Converse. Organize. Venda no automático.",
     description: "O CRM com IA para transformar cada mensagem em oportunidade.",
-    images: [{ url: "/og.png", width: 1736, height: 907, alt: "NOIRA CRM com IA" }],
+    images: [{ url: "/og.png", width: 1672, height: 941, alt: "NOIRA CRM com IA" }],
     locale: "pt_BR",
     type: "website",
   },

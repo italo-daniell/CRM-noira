@@ -17,7 +17,7 @@ const plans = [
 ];
 
 function Brand() {
-  return <span className="brand"><span className="brand-mark">N</span>NOIRA</span>;
+  return <span className="brand"><img className="brand-mark" src="/noira-logo.jfif" alt="" />NOIRA</span>;
 }
 
 function MiniApp({ type }: { type: string }) {
