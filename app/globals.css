@@ -12,3 +12,52 @@
 /* NOIRA official brand mark */
 .brand-mark{display:block!important;width:36px!important;height:36px!important;border-radius:10px!important;background:#0e1224!important;object-fit:cover;object-position:center;box-shadow:0 4px 14px rgba(8,12,31,.18)!important;transform:none!important}
 .product-sidebar .brand-mark{width:28px!important;height:28px!important;border-radius:8px!important;box-shadow:none!important}
+html{color-scheme:light}
+html[data-theme="dark"]{color-scheme:dark;--paper:#0d0b18;--soft:#171326;--line:#2c2540}
+.theme-toggle{width:72px;height:38px;padding:4px;border:1px solid rgba(110,92,150,.25);border-radius:999px;background:#ece8f7;color:#554b70;display:flex;align-items:center;justify-content:space-between;position:relative;cursor:pointer;box-shadow:0 8px 24px rgba(21,13,49,.15);transition:background .25s,border-color .25s,transform .2s}
+.theme-toggle:hover{transform:translateY(-1px)}
+.theme-toggle span{width:28px;position:relative;z-index:2;font-size:15px;line-height:28px;text-align:center}
+.theme-toggle i{position:absolute;z-index:1;left:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 3px 10px rgba(20,12,44,.2);transition:transform .28s cubic-bezier(.2,.8,.2,1),background .25s}
+.theme-toggle-global{position:fixed;z-index:100;top:20px;right:max(220px,calc((100vw - 1180px)/2 + 220px))}
+html[data-theme="dark"] .theme-toggle{background:#211a38;color:#dcd5ef;border-color:#3c3158}
+html[data-theme="dark"] .theme-toggle i{transform:translateX(34px);background:#6d42ee}
+html[data-theme="dark"] body{background:#0d0b18;color:#f4f1ff}
+html[data-theme="dark"] .nav-wrap{background:rgba(13,11,24,.9);border-color:#2a243a}
+html[data-theme="dark"] .nav-links.open{background:#151120}
+html[data-theme="dark"] .hero{background:radial-gradient(circle at 50% 8%,#171326 0,#171326 10%,transparent 44%),linear-gradient(145deg,#100d1c 22%,#1c1536 70%,#10272d)}
+html[data-theme="dark"] .hero-inner>p,html[data-theme="dark"] .channel-row small,html[data-theme="dark"] .section-heading p,html[data-theme="dark"] .feature-copy p,html[data-theme="dark"] .pricing-note{color:#b9b0cb}
+html[data-theme="dark"] .channel-row span{background:#211a36;color:#a88cff;box-shadow:0 5px 18px rgba(0,0,0,.25)}
+html[data-theme="dark"] .product-frame{background:rgba(31,24,51,.72);border-color:#3b2c61;box-shadow:0 35px 80px rgba(0,0,0,.35)}
+html[data-theme="dark"] .product-shell,html[data-theme="dark"] .product-main{background:#12101d;color:#f4f1ff}
+html[data-theme="dark"] .stats>span,html[data-theme="dark"] .lead-card,html[data-theme="dark"] .ai-panel{background:#1b1728;border-color:#322b43;color:#f4f1ff}
+html[data-theme="dark"] .ai-note{background:#271f3e}
+html[data-theme="dark"] .logos,html[data-theme="dark"] .section,html[data-theme="dark"] .pricing{background:#0d0b18;border-color:#282235}
+html[data-theme="dark"] .feature-card{background:#171326}
+html[data-theme="dark"] .mini-app,html[data-theme="dark"] .contact-list,html[data-theme="dark"] .board,html[data-theme="dark"] .calendar,html[data-theme="dark"] .report{background:#171522;color:#f4f1ff}
+html[data-theme="dark"] .chat{background:#100e19}
+html[data-theme="dark"] .contact,html[data-theme="dark"] .board-head,html[data-theme="dark"] .cal-head,html[data-theme="dark"] .report-head,html[data-theme="dark"] .days,html[data-theme="dark"] .cal-row{border-color:#302a3e}
+html[data-theme="dark"] .bubble.in,html[data-theme="dark"] .deal{background:#24202f;border-color:#3a3349;color:#f4f1ff}
+html[data-theme="dark"] .results{background:#12101d}
+html[data-theme="dark"] .result-cards article{background:#1b1728;border-color:#302a42}
+html[data-theme="dark"] .quote{background:#2a2440;color:#f4f1ff}
+html[data-theme="dark"] .quote small{color:#b8b0c8}
+html[data-theme="dark"] .period{background:#1c1828}
+html[data-theme="dark"] .period button.selected{background:#312747;color:#fff}
+html[data-theme="dark"] .plans article{background:#171326;border-color:#2d263c}
+html[data-theme="dark"] .plans article.popular{background:#251d42;border-color:#8f72f4}
+html[data-theme="dark"] .plans>article>p,html[data-theme="dark"] .price span{color:#b8afca}
+html[data-theme="dark"] .outline{border-color:#dcd5ef;color:#fff}
+html[data-theme="dark"] .footer-top{background:#171326;color:#f4f1ff}
+html[data-theme="dark"] .footer-top p{color:#b8afca}
+html[data-theme="dark"] .dash{background:#0d0b18;color:#f4f1ff}
+html[data-theme="dark"] .dash-main{background:#0d0b18}
+html[data-theme="dark"] .dash-main>header small,html[data-theme="dark"] .dash-stats span,html[data-theme="dark"] .dash-col>header small{color:#aaa2ba}
+html[data-theme="dark"] .dash-actions button,html[data-theme="dark"] .dash-stats article,html[data-theme="dark"] .dash-card,html[data-theme="dark"] .dash-ai{background:#1a1724;border-color:#302a3e;color:#f4f1ff}
+html[data-theme="dark"] .dash-col{background:#14111c}
+html[data-theme="dark"] .dash-card footer{border-color:#332d3e}
+html[data-theme="dark"] .ai-insight{background:#211b31;border-color:#3a304e}
+html[data-theme="dark"] .dash-ai form{background:#14111d;border-color:#3a3347}
+html[data-theme="dark"] .dash-ai input{background:transparent;color:#fff}
+html[data-theme="dark"] .dash-ai input::placeholder{color:#8e879b}
+@media(max-width:900px){.theme-toggle-global{top:15px;right:70px}}
+@media(max-width:650px){.theme-toggle-global{top:12px;right:68px;width:64px;height:36px}.theme-toggle i{width:26px;height:26px}.theme-toggle span{width:25px;font-size:13px}.theme-toggle{padding:4px}html[data-theme="dark"] .theme-toggle i{transform:translateX(30px)}}
