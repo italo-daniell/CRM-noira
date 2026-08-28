@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-type Props = { active: "pipeline" | "conversations" | "contacts" };
+type Props = { active: "pipeline" | "conversations" | "contacts" | "calendar" };
 
 export function DashboardSidebar({ active }: Props) {
   return (
@@ -15,7 +15,7 @@ export function DashboardSidebar({ active }: Props) {
         <Link className={active === "pipeline" ? "on" : ""} href="/dashboard">▥ <span>Pipeline</span></Link>
         <Link className={active === "conversations" ? "on" : ""} href="/dashboard/conversations">▢ <span>Conversas</span><b>9</b></Link>
         <Link className={active === "contacts" ? "on" : ""} href="/dashboard/contacts">◎ <span>Contatos</span></Link>
-        <a href="#agenda">◷ <span>Agenda</span></a>
+        <Link className={active === "calendar" ? "on" : ""} href="/dashboard/calendar">◷ <span>Agenda</span></Link>
         <a href="#relatorios">◉ <span>Relatórios</span></a>
         <a href="#noira-ai">✦ <span>NOIRA IA</span></a>
       </nav>
