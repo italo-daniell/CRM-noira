@@ -43,7 +43,7 @@ export default function ContactsPage() {
   const [tab, setTab] = useState<"Contatos" | "Empresas">("Contatos");
   const [filter, setFilter] = useState("Todos");
   const [selected, setSelected] = useState<number[]>([]);
-  const [opened, setOpened] = useState<number | null>(1);
+  const [opened, setOpened] = useState<number | null>(null);
   const [newOpen, setNewOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
 

@@ -40,7 +40,7 @@ export default function CalendarPage(){
   const [owner,setOwner]=useState("Todos");
   const [query,setQuery]=useState("");
   const [createOpen,setCreateOpen]=useState(false);
-  const [selected,setSelected]=useState<number|null>(6);
+  const [selected,setSelected]=useState<number|null>(null);
   const [monthOffset,setMonthOffset]=useState(0);
   const [mobileMenu,setMobileMenu]=useState(false);
 
