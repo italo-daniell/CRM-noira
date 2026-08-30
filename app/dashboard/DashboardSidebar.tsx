@@ -2,7 +2,7 @@
 
 import { ThemeToggle } from "../ThemeToggle";
 
-type Props = { active: "pipeline" | "conversations" | "contacts" | "calendar" };
+type Props = { active: "pipeline" | "conversations" | "contacts" | "calendar" | "reports" };
 
 export function DashboardSidebar({ active }: Props) {
   return (
@@ -17,7 +17,7 @@ export function DashboardSidebar({ active }: Props) {
         <a aria-current={active === "contacts" ? "page" : undefined} className={active === "contacts" ? "on" : ""} href="/dashboard/contacts">◎ <span>Contatos</span></a>
         <a aria-current={active === "calendar" ? "page" : undefined} className={active === "calendar" ? "on" : ""} href="/dashboard/calendar">◷ <span>Agenda</span></a>
         <div className="dash-nav-theme"><ThemeToggle placement="dashboard"/></div>
-        <a href="#relatorios">◉ <span>Relatórios</span></a>
+        <a aria-current={active === "reports" ? "page" : undefined} className={active === "reports" ? "on" : ""} href="/dashboard/reports">◉ <span>Relatórios</span></a>
         <a href="#noira-ai">✦ <span>NOIRA IA</span></a>
       </nav>
       <div className="dash-theme"><span>Aparência</span><ThemeToggle placement="dashboard"/></div>
