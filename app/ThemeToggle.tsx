@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
-export function ThemeToggle() {
+type Props = { placement?: "site" | "dashboard" };
+
+export function ThemeToggle({ placement = "site" }: Props) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      className="theme-toggle theme-toggle-global"
+      className={`theme-toggle theme-toggle-${placement}`}
       onClick={toggleTheme}
       aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
       title={theme === "dark" ? "Modo claro" : "Modo escuro"}
