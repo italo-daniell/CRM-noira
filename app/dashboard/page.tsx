@@ -32,20 +32,40 @@ export default function Dashboard() {
   const [editing,setEditing]=useState<number|null>(null);
   const [deleting,setDeleting]=useState<number|null>(null);
   const [toast,setToast]=useState("");
+  const [searchOpen,setSearchOpen]=useState(false);
+  const [filterOpen,setFilterOpen]=useState(false);
+  const [createOpen,setCreateOpen]=useState(false);
+  const [query,setQuery]=useState("");
+  const [stageFilter,setStageFilter]=useState("Todas as etapas");
+  const [channelFilter,setChannelFilter]=useState("Todos os canais");
+  const [ownerFilter,setOwnerFilter]=useState("Todos");
   const current=leads.find((lead)=>lead.id===selected)||null;
   const editLead=leads.find((lead)=>lead.id===editing)||null;
   const deleteLead=leads.find((lead)=>lead.id===deleting)||null;
+  const filtersActive=Boolean(query||stageFilter!=="Todas as etapas"||channelFilter!=="Todos os canais"||ownerFilter!=="Todos");
+  const visibleLeads=leads.filter((lead)=>{
+    const text=`${lead.name} ${lead.value} ${lead.channel} ${lead.tag}`.toLowerCase();
+    return text.includes(query.toLowerCase())&&(stageFilter==="Todas as etapas"||lead.stage===stageFilter)&&(channelFilter==="Todos os canais"||lead.channel===channelFilter)&&(ownerFilter==="Todos"||lead.owner===ownerFilter);
+  });
 
   function notify(message:string){setToast(message);window.setTimeout(()=>setToast(""),2600)}
   function moveLead(id:number,stage:string){setLeads((items)=>items.map((lead)=>lead.id===id?{...lead,stage}:lead));setMenu(null);notify(`Lead movido para ${stage}.`)}
   function saveLead(event:FormEvent<HTMLFormElement>){event.preventDefault();const data=new FormData(event.currentTarget);setLeads((items)=>items.map((lead)=>lead.id===editing?{...lead,name:String(data.get("name")),value:String(data.get("value")),channel:String(data.get("channel")),tag:String(data.get("tag")),stage:String(data.get("stage"))}:lead));setEditing(null);notify("Alterações salvas com sucesso.")}
   function removeLead(){if(deleting===null)return;setLeads((items)=>items.filter((lead)=>lead.id!==deleting));if(selected===deleting)setSelected(null);setDeleting(null);notify("Lead excluído do pipeline.")}
+  function addLead(event:FormEvent<HTMLFormElement>){event.preventDefault();const data=new FormData(event.currentTarget);const rawValue=String(data.get("value")||"0").replace(/\D/g,"");const lead:Lead={id:Date.now(),name:String(data.get("name")),value:`R$ ${Number(rawValue).toLocaleString("pt-BR")}`,channel:String(data.get("channel")),tag:String(data.get("tag")||"Novo"),owner:String(data.get("owner")),stage:String(data.get("stage"))};setLeads((items)=>[...items,lead]);setCreateOpen(false);setStageFilter("Todas as etapas");setChannelFilter("Todos os canais");setOwnerFilter("Todos");setQuery("");notify(`${lead.name} foi adicionado ao pipeline.`)}
+  function clearFilters(){setQuery("");setStageFilter("Todas as etapas");setChannelFilter("Todos os canais");setOwnerFilter("Todos")}
 
   return (
     <main className="dash">
       <DashboardSidebar active="pipeline" />
       <section className="dash-main">
-        <header><div><small>Espaço de trabalho / Comercial</small><h1>Pipeline de vendas</h1></div><div className="dash-actions"><button>⌕ Buscar</button><button>Filtrar</button><button className="primary">+ Novo lead</button></div></header>
+        <header><div><small>Espaço de trabalho / Comercial</small><h1>Pipeline de vendas</h1></div><div className="dash-actions"><button className={searchOpen?"active":""} aria-expanded={searchOpen} onClick={()=>{setSearchOpen(!searchOpen);setFilterOpen(false)}}>⌕ Buscar</button><button className={filterOpen||filtersActive?"active":""} aria-expanded={filterOpen} onClick={()=>{setFilterOpen(!filterOpen);setSearchOpen(false)}}>Filtrar {filtersActive&&<i>•</i>}</button><button className="primary" onClick={()=>setCreateOpen(true)}>+ Novo lead</button></div></header>
+        {(searchOpen||filterOpen)&&<section className="pipeline-tools">
+          {searchOpen&&<label className="pipeline-search"><span>⌕</span><input autoFocus value={query} onChange={(event)=>setQuery(event.target.value)} placeholder="Buscar por nome, valor, canal ou etiqueta"/>{query&&<button onClick={()=>setQuery("")} aria-label="Limpar busca">×</button>}</label>}
+          {filterOpen&&<div className="pipeline-filters"><label>Etapa<select value={stageFilter} onChange={(event)=>setStageFilter(event.target.value)}><option>Todas as etapas</option>{stages.map((stage)=><option key={stage}>{stage}</option>)}</select></label><label>Canal<select value={channelFilter} onChange={(event)=>setChannelFilter(event.target.value)}><option>Todos os canais</option><option>WhatsApp</option><option>Instagram</option><option>Site</option><option>Indicação</option><option>Formulário</option></select></label><label>Responsável<select value={ownerFilter} onChange={(event)=>setOwnerFilter(event.target.value)}><option>Todos</option><option value="MS">Marina Silva</option><option value="CL">Carlos Lima</option><option value="AR">Ana Reis</option></select></label><button onClick={clearFilters} disabled={!filtersActive}>Limpar filtros</button></div>}
+          <button className="pipeline-tools-close" aria-label="Fechar" onClick={()=>{setSearchOpen(false);setFilterOpen(false)}}>×</button>
+        </section>}
+        {filtersActive&&<div className="filter-summary"><span>{visibleLeads.length} {visibleLeads.length===1?"lead encontrado":"leads encontrados"}</span><button onClick={clearFilters}>Limpar tudo ×</button></div>}
         <div className="dash-stats">
           <article><span>Valor do pipeline</span><b>R$ 284.500</b><small>↑ 12,8% este mês</small></article>
           <article><span>Negócios ativos</span><b>48</b><small>↑ 6 esta semana</small></article>
@@ -54,8 +74,8 @@ export default function Dashboard() {
         </div>
         <div className="dash-board">
           {stages.map((stage) => <article className="dash-col" key={stage}>
-            <header><div><b>{stage}</b><i>{stageMeta[stage].count}</i></div><small>{stageMeta[stage].value}</small></header>
-            {leads.filter((lead)=>lead.stage===stage).map((lead,index) => <div className="dash-card" key={lead.id} onClick={()=>setSelected(lead.id)}>
+            <header><div><b>{stage}</b><i>{filtersActive?visibleLeads.filter((lead)=>lead.stage===stage).length:stageMeta[stage].count+leads.filter((lead)=>lead.stage===stage).length-initialLeads.filter((lead)=>lead.stage===stage).length}</i></div><small>{stageMeta[stage].value}</small></header>
+            {visibleLeads.filter((lead)=>lead.stage===stage).map((lead,index) => <div className="dash-card" key={lead.id} onClick={()=>setSelected(lead.id)}>
               <div><i>{lead.name[0]}</i><small>{lead.channel}</small><button className={menu===lead.id?"lead-more active":"lead-more"} aria-label={`Ações de ${lead.name}`} aria-expanded={menu===lead.id} onClick={(event)=>{event.stopPropagation();setMenu(menu===lead.id?null:lead.id)}}>•••</button>
                 {menu===lead.id&&<div className="lead-menu" role="menu" onClick={(event)=>event.stopPropagation()}>
                   <button onClick={()=>{setSelected(lead.id);setMenu(null)}}><i>▤</i><span><b>Abrir lead</b><small>Ver todos os detalhes</small></span></button>
@@ -69,6 +89,7 @@ export default function Dashboard() {
               <b>{lead.name}</b><strong>{lead.value}</strong><span className={index===0?"hot":""}>✦ {lead.tag}</span>
               <footer><small>◷ Hoje</small><em>{lead.owner}</em></footer>
             </div>)}
+            {visibleLeads.filter((lead)=>lead.stage===stage).length===0&&<div className="pipeline-empty"><span>⌕</span><b>Nenhum lead</b><small>Não há resultados nesta etapa.</small></div>}
           </article>)}
         </div>
       </section>
@@ -79,6 +100,7 @@ export default function Dashboard() {
       <aside className={`lead-drawer ${current?"open":""}`}>{current&&<><header><span>DETALHES DO LEAD</span><button onClick={()=>setSelected(null)}>×</button></header><div className="lead-profile"><i>{current.name[0]}</i><div><h2>{current.name}</h2><p>{current.channel} · Responsável {current.owner}</p></div></div><section className="lead-value"><span>Valor do negócio</span><strong>{current.value}</strong><small>✦ {current.tag}</small></section><dl><div><dt>Etapa atual</dt><dd>{current.stage}</dd></div><div><dt>Última atividade</dt><dd>Hoje, há 8 minutos</dd></div><div><dt>Próxima ação</dt><dd>Fazer follow-up comercial</dd></div></dl><div className="lead-drawer-actions"><a href={`/dashboard/conversations?lead=${encodeURIComponent(current.name)}`}>▢ Enviar mensagem</a><a href={`/dashboard/calendar?lead=${encodeURIComponent(current.name)}`}>◷ Criar tarefa</a><button onClick={()=>{setEditing(current.id);setSelected(null)}}>✎ Editar lead</button></div></>}</aside>
 
       {editLead&&<div className="lead-modal" role="dialog" aria-modal="true" aria-label="Editar lead"><form onSubmit={saveLead}><header><div><small>PIPELINE DE VENDAS</small><h2>Editar lead</h2></div><button type="button" onClick={()=>setEditing(null)}>×</button></header><label>Nome do lead<input name="name" defaultValue={editLead.name} required autoFocus/></label><div className="lead-form-row"><label>Valor<input name="value" defaultValue={editLead.value} required/></label><label>Canal<select name="channel" defaultValue={editLead.channel}><option>WhatsApp</option><option>Instagram</option><option>Site</option><option>Indicação</option><option>Formulário</option></select></label></div><label>Etiqueta<input name="tag" defaultValue={editLead.tag}/></label><label>Etapa<select name="stage" defaultValue={editLead.stage}>{stages.map((stage)=><option key={stage}>{stage}</option>)}</select></label><footer><button type="button" onClick={()=>setEditing(null)}>Cancelar</button><button className="primary" type="submit">Salvar alterações</button></footer></form></div>}
+      {createOpen&&<div className="lead-modal" role="dialog" aria-modal="true" aria-label="Novo lead"><form onSubmit={addLead}><header><div><small>PIPELINE DE VENDAS</small><h2>Novo lead</h2><p>Adicione uma nova oportunidade à equipe comercial.</p></div><button type="button" onClick={()=>setCreateOpen(false)}>×</button></header><label>Nome do lead<input name="name" placeholder="Ex.: Clínica Horizonte" required autoFocus/></label><div className="lead-form-row"><label>Valor estimado<input name="value" inputMode="numeric" placeholder="Ex.: 8500" required/></label><label>Canal<select name="channel" defaultValue="WhatsApp"><option>WhatsApp</option><option>Instagram</option><option>Site</option><option>Indicação</option><option>Formulário</option></select></label></div><div className="lead-form-row"><label>Responsável<select name="owner" defaultValue="MS"><option value="MS">Marina Silva</option><option value="CL">Carlos Lima</option><option value="AR">Ana Reis</option></select></label><label>Etapa<select name="stage" defaultValue="Novos leads">{stages.map((stage)=><option key={stage}>{stage}</option>)}</select></label></div><label>Etiqueta<input name="tag" placeholder="Ex.: Alta intenção"/></label><footer><button type="button" onClick={()=>setCreateOpen(false)}>Cancelar</button><button className="primary" type="submit">Adicionar lead</button></footer></form></div>}
       {deleteLead&&<div className="lead-modal confirm" role="alertdialog" aria-modal="true" aria-label="Excluir lead"><div><span>⌫</span><h2>Excluir {deleteLead.name}?</h2><p>Este lead será removido do pipeline. Esta ação não poderá ser desfeita nesta demonstração.</p><footer><button onClick={()=>setDeleting(null)}>Cancelar</button><button className="delete" onClick={removeLead}>Excluir lead</button></footer></div></div>}
       {toast&&<div className="lead-toast">✓ {toast}</div>}
     </main>
