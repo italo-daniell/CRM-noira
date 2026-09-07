@@ -2,7 +2,7 @@
 
 import { ThemeToggle } from "../ThemeToggle";
 
-type Props = { active: "pipeline" | "conversations" | "contacts" | "calendar" | "reports" | "ai" };
+type Props = { active: "pipeline" | "conversations" | "contacts" | "calendar" | "reports" | "ai" | "profile" };
 
 export function DashboardSidebar({ active }: Props) {
   return (
@@ -21,7 +21,7 @@ export function DashboardSidebar({ active }: Props) {
         <a aria-current={active === "ai" ? "page" : undefined} className={active === "ai" ? "on" : ""} href="/dashboard/ai">✦ <span>NOIRA IA</span></a>
       </nav>
       <div className="dash-theme"><span>Aparência</span><ThemeToggle placement="dashboard"/></div>
-      <div className="dash-user"><i>MS</i><span><b>Marina Silva</b><small>Administrador</small></span></div>
+      <a href="/dashboard/profile" aria-current={active === "profile" ? "page" : undefined} className={`dash-user ${active === "profile" ? "active" : ""}`}><i>MS</i><span><b>Marina Silva</b><small>Administrador</small></span></a>
     </aside>
   );
 }
