@@ -33,7 +33,7 @@ export default function ProfilePage(){
     <DashboardSidebar active="profile"/>
     <aside className="settings-nav">
       <header><span>⚙</span><b>CONFIGURAÇÕES</b></header>
-      <nav aria-label="Seções das configurações">{menu.map(group=><section key={group.group}><small>{group.group}</small>{group.items.map(item=><button key={item.id} className={section===item.id?"active":""} onClick={()=>setSection(item.id)}>{item.label}<span>›</span></button>)}{group.group==="NOIRA IA"&&<a href="/dashboard/ai">Fontes de conhecimento <span>↗</span></a>}</section>)}</nav>
+      <nav aria-label="Seções das configurações">{menu.map(group=><section key={group.group}><small>{group.group}</small>{group.items.map(item=><button key={item.id} className={section===item.id?"active":""} onClick={()=>setSection(item.id)}>{item.label}<span>›</span></button>)}{group.group==="Área de trabalho"&&<a href="/dashboard/admin">♜ Painel do proprietário <span>↗</span></a>}{group.group==="NOIRA IA"&&<a href="/dashboard/ai">Fontes de conhecimento <span>↗</span></a>}</section>)}</nav>
     </aside>
     <main className="profile-main">
       <header><div><small>CONTA E PREFERÊNCIAS</small><h1>{title}</h1></div><button className="save-top" onClick={()=>save()} disabled={!dirty}>Salvar</button></header>

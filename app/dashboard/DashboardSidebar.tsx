@@ -2,9 +2,15 @@
 
 import { ThemeToggle } from "../ThemeToggle";
 
-type Props = { active: "pipeline" | "conversations" | "contacts" | "calendar" | "reports" | "ai" | "profile" };
+type Props = {
+  active: "pipeline" | "conversations" | "contacts" | "calendar" | "reports" | "ai" | "profile" | "admin";
+  showAdmin?: boolean;
+  userName?: string;
+  userRole?: string;
+};
 
-export function DashboardSidebar({ active }: Props) {
+export function DashboardSidebar({ active, showAdmin = false, userName = "Marina Silva", userRole = "Administrador" }: Props) {
+  const initials = userName.split(" ").slice(0, 2).map((part) => part[0]).join("").toUpperCase();
   return (
     <aside className="dash-side">
       <a href="/" className="brand" aria-label="Voltar ao início da NOIRA">
@@ -19,9 +25,10 @@ export function DashboardSidebar({ active }: Props) {
         <div className="dash-nav-theme"><ThemeToggle placement="dashboard"/></div>
         <a aria-current={active === "reports" ? "page" : undefined} className={active === "reports" ? "on" : ""} href="/dashboard/reports">◉ <span>Relatórios</span></a>
         <a aria-current={active === "ai" ? "page" : undefined} className={active === "ai" ? "on" : ""} href="/dashboard/ai">✦ <span>NOIRA IA</span></a>
+        {showAdmin && <a aria-current={active === "admin" ? "page" : undefined} className={active === "admin" ? "on" : ""} href="/dashboard/admin">♜ <span>Administração</span></a>}
       </nav>
       <div className="dash-theme"><span>Aparência</span><ThemeToggle placement="dashboard"/></div>
-      <a href="/dashboard/profile" aria-current={active === "profile" ? "page" : undefined} className={`dash-user ${active === "profile" ? "active" : ""}`}><i>MS</i><span><b>Marina Silva</b><small>Administrador</small></span></a>
+      <a href="/dashboard/profile" aria-current={active === "profile" ? "page" : undefined} className={`dash-user ${active === "profile" ? "active" : ""}`}><i>{initials}</i><span><b>{userName}</b><small>{userRole}</small></span></a>
     </aside>
   );
 }
