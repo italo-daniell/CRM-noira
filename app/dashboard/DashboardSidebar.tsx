@@ -18,7 +18,7 @@ export function DashboardSidebar({ active, showAdmin = false, userName = "Marina
         <span>NOIRA</span>
       </a>
       <nav aria-label="Navegação principal">
-        <a aria-current={active === "pipeline" ? "page" : undefined} className={active === "pipeline" ? "on" : ""} href="/dashboard">▥ <span>Pipeline</span></a>
+        <a aria-current={active === "pipeline" ? "page" : undefined} className={active === "pipeline" ? "on" : ""} href="/dashboard">▥ <span>Dashboard</span></a>
         <a aria-current={active === "conversations" ? "page" : undefined} className={active === "conversations" ? "on" : ""} href="/dashboard/conversations">▢ <span>Conversas</span><b>9</b></a>
         <a aria-current={active === "contacts" ? "page" : undefined} className={active === "contacts" ? "on" : ""} href="/dashboard/contacts">◎ <span>Contatos</span></a>
         <a aria-current={active === "calendar" ? "page" : undefined} className={active === "calendar" ? "on" : ""} href="/dashboard/calendar">◷ <span>Agenda</span></a>
