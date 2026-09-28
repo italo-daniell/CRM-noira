@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  CalendarDays,
+  ChartNoAxesCombined,
+  ContactRound,
+  LayoutDashboard,
+  MessageSquareText,
+  ShieldCheck,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { ThemeToggle } from "../ThemeToggle";
 
 type Props = {
@@ -8,6 +18,23 @@ type Props = {
   userName?: string;
   userRole?: string;
 };
+
+type NavigationItem = {
+  id: Props["active"];
+  label: string;
+  href: string;
+  icon: LucideIcon;
+  badge?: string;
+};
+
+const navigationItems: NavigationItem[] = [
+  { id: "pipeline", label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { id: "conversations", label: "Conversas", href: "/dashboard/conversations", icon: MessageSquareText, badge: "9" },
+  { id: "contacts", label: "Contatos", href: "/dashboard/contacts", icon: ContactRound },
+  { id: "calendar", label: "Agenda", href: "/dashboard/calendar", icon: CalendarDays },
+  { id: "reports", label: "Relatórios", href: "/dashboard/reports", icon: ChartNoAxesCombined },
+  { id: "ai", label: "NOIRA IA", href: "/dashboard/ai", icon: Sparkles },
+];
 
 export function DashboardSidebar({ active, showAdmin = false, userName = "Marina Silva", userRole = "Administrador" }: Props) {
   const initials = userName.split(" ").slice(0, 2).map((part) => part[0]).join("").toUpperCase();
@@ -18,14 +45,18 @@ export function DashboardSidebar({ active, showAdmin = false, userName = "Marina
         <span>NOIRA</span>
       </a>
       <nav aria-label="Navegação principal">
-        <a aria-current={active === "pipeline" ? "page" : undefined} className={active === "pipeline" ? "on" : ""} href="/dashboard">▥ <span>Dashboard</span></a>
-        <a aria-current={active === "conversations" ? "page" : undefined} className={active === "conversations" ? "on" : ""} href="/dashboard/conversations">▢ <span>Conversas</span><b>9</b></a>
-        <a aria-current={active === "contacts" ? "page" : undefined} className={active === "contacts" ? "on" : ""} href="/dashboard/contacts">◎ <span>Contatos</span></a>
-        <a aria-current={active === "calendar" ? "page" : undefined} className={active === "calendar" ? "on" : ""} href="/dashboard/calendar">◷ <span>Agenda</span></a>
+        {navigationItems.slice(0, 4).map((item) => {
+          const Icon = item.icon;
+          const selected = active === item.id;
+          return <a key={item.id} aria-label={item.label} aria-current={selected ? "page" : undefined} className={selected ? "on" : ""} data-tooltip={item.label} href={item.href}><Icon className="dash-nav-icon" aria-hidden="true" strokeWidth={2}/><span>{item.label}</span>{item.badge && <b>{item.badge}</b>}</a>;
+        })}
         <div className="dash-nav-theme"><ThemeToggle placement="dashboard"/></div>
-        <a aria-current={active === "reports" ? "page" : undefined} className={active === "reports" ? "on" : ""} href="/dashboard/reports">◉ <span>Relatórios</span></a>
-        <a aria-current={active === "ai" ? "page" : undefined} className={active === "ai" ? "on" : ""} href="/dashboard/ai">✦ <span>NOIRA IA</span></a>
-        {showAdmin && <a aria-current={active === "admin" ? "page" : undefined} className={active === "admin" ? "on" : ""} href="/dashboard/admin">♜ <span>Administração</span></a>}
+        {navigationItems.slice(4).map((item) => {
+          const Icon = item.icon;
+          const selected = active === item.id;
+          return <a key={item.id} aria-label={item.label} aria-current={selected ? "page" : undefined} className={selected ? "on" : ""} data-tooltip={item.label} href={item.href}><Icon className="dash-nav-icon" aria-hidden="true" strokeWidth={2}/><span>{item.label}</span></a>;
+        })}
+        {showAdmin && <a aria-label="Administração" aria-current={active === "admin" ? "page" : undefined} className={active === "admin" ? "on" : ""} data-tooltip="Administração" href="/dashboard/admin"><ShieldCheck className="dash-nav-icon" aria-hidden="true" strokeWidth={2}/><span>Administração</span></a>}
       </nav>
       <div className="dash-theme"><span>Aparência</span><ThemeToggle placement="dashboard"/></div>
       <a href="/dashboard/profile" aria-current={active === "profile" ? "page" : undefined} className={`dash-user ${active === "profile" ? "active" : ""}`}><i>{initials}</i><span><b>{userName}</b><small>{userRole}</small></span></a>
