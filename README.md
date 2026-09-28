@@ -49,8 +49,20 @@ Todo registro comercial deve pertencer a um `workspace`. Permissões, consultas 
 Requer Node.js 22 ou superior.
 
 ```bash
-npm install
-npm run dev
+pnpm install
+Copy-Item .env.example .env.local
+pnpm dev
 ```
 
 A página pública fica em `/` e o protótipo do CRM em `/dashboard`.
+
+## Supabase e Vercel
+
+O projeto usa as variáveis `NEXT_PUBLIC_SUPABASE_URL` e
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Use somente a chave publicável no
+frontend; qualquer chave secreta deve permanecer em variáveis exclusivas do
+servidor.
+
+Na Vercel, configure as variáveis para Production, Preview e Development. O
+build de produção usa Next.js nativo, permitindo deploy automático a cada push
+para o repositório GitHub conectado.
