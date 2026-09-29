@@ -3,9 +3,12 @@
 .dash-theme+.dash-user{margin-top:12px}
 
 /* Unified Lucide navigation language. */
+.dash-side{position:relative;z-index:30;overflow:visible}
+.dash-side nav{position:relative;z-index:31;overflow:visible}
 .dash-side nav a{position:relative;isolation:isolate;border:1px solid transparent;transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease}
 .dash-side nav a .dash-nav-icon{width:19px;height:19px;flex:0 0 19px;color:#bdb5d2;transition:color .18s ease,transform .18s ease;vector-effect:non-scaling-stroke}
 .dash-side nav a:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.09);color:#fff;transform:translateX(2px)}
+.dash-side nav a:hover,.dash-side nav a:focus-visible{z-index:2}
 .dash-side nav a:hover .dash-nav-icon{color:#fff;transform:scale(1.06)}
 .dash-side nav a:focus-visible{outline:3px solid #bfaeff;outline-offset:2px;background:rgba(255,255,255,.1);color:#fff}
 .dash-side nav a.on{background:linear-gradient(135deg,#7a4df1,#6637dc);border-color:#8d69ef;color:#fff;box-shadow:0 8px 20px rgba(70,39,159,.34)}
