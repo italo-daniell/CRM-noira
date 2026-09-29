@@ -3,3 +3,28 @@ html[data-theme="dark"] .conversations-app,html[data-theme="dark"] .conversation
 @media(max-width:1180px){.conversation-layout{grid-template-columns:290px minmax(360px,1fr)}.lead-panel{position:fixed;z-index:120;right:0;top:0;width:300px;transform:translateX(105%);transition:transform .25s;box-shadow:-20px 0 50px rgba(15,8,35,.2)}.conversation-layout.info-open .lead-panel{transform:translateX(0)}.mobile-info{display:inline-block}.chat-actions button:nth-child(1),.chat-actions button:nth-child(2){display:none}}
 @media(max-width:850px){.conversations-app{grid-template-columns:75px minmax(0,1fr)}.conversation-layout{grid-template-columns:280px minmax(330px,1fr)}}
 @media(max-width:650px){.conversations-app{display:block;height:100dvh}.conversation-layout{display:block;height:calc(100dvh - 62px)}.inbox-list,.chat-panel{height:calc(100dvh - 62px)}.conversation-layout:not(.mobile-chat) .chat-panel{display:none}.conversation-layout.mobile-chat .inbox-list{display:none}.inbox-heading{height:68px;padding-right:80px}.conversation-item{min-height:74px}.mobile-back{display:block;border:0;background:none;font-size:24px;color:inherit}.chat-header{height:66px;padding-right:62px}.chat-actions button:not(.mobile-info):not(:last-child){display:none}.chat-context{overflow:auto;justify-content:flex-start;padding:0 12px;white-space:nowrap}.message-stream{padding:12px}.message-bubble{max-width:82%}.message-composer{margin:6px 8px 8px}.composer-tools button:nth-child(2){display:none}.lead-panel{height:100dvh}.inbox-footer{display:none}}
+
+/* NOIRA Black — Conversas */
+html[data-theme="dark"] .conversations-app,
+html[data-theme="dark"] .conversation-layout{background:var(--noira-black);color:var(--noira-text)}
+html[data-theme="dark"] .inbox-list,
+html[data-theme="dark"] .chat-panel,
+html[data-theme="dark"] .lead-panel,
+html[data-theme="dark"] .chat-header,
+html[data-theme="dark"] .chat-context{background:var(--noira-surface);border-color:var(--noira-line);color:var(--noira-text)}
+html[data-theme="dark"] .conversation-search,
+html[data-theme="dark"] .channel-filter button,
+html[data-theme="dark"] .conversation-item,
+html[data-theme="dark"] .message-composer,
+html[data-theme="dark"] .lead-identity button,
+html[data-theme="dark"] .stage-select,
+html[data-theme="dark"] .owner,
+html[data-theme="dark"] .shortcut-grid button{background:var(--noira-card);color:var(--noira-text);border-color:var(--noira-line)}
+html[data-theme="dark"] .conversation-item:hover{background:var(--noira-hover)}
+html[data-theme="dark"] .conversation-item.selected{background:#14284A;box-shadow:inset 3px 0 0 var(--noira-action)}
+html[data-theme="dark"] .message-stream{background:radial-gradient(circle at 88% 8%,rgba(9,107,255,.10),transparent 30%),var(--noira-black)}
+html[data-theme="dark"] .message-bubble{background:var(--noira-card);border-color:var(--noira-line)}
+html[data-theme="dark"] .message-row.agent .message-bubble{background:linear-gradient(135deg,var(--noira-action),#315FE9);border-color:#4A91FF}
+html[data-theme="dark"] .ai-suggestion{background:#121C30;border-color:#274B7D}
+html[data-theme="dark"] .next-task{background:var(--noira-card)}
+html[data-theme="dark"] .next-task button{background:#17233A;color:#DCEAFF}

@@ -3,3 +3,36 @@ html[data-theme="dark"] .contacts-app,html[data-theme="dark"] .contacts-workspac
 @media(max-width:1100px){.contacts-app{grid-template-columns:75px minmax(0,1fr)}.bulk-bar{left:99px}.quick-filters button:nth-child(n+4){display:none}.companies-grid{grid-template-columns:repeat(3,minmax(180px,1fr))}}
 @media(max-width:760px){.contacts-toolbar{flex-wrap:wrap}.contacts-search{width:100%;order:0}.quick-filters{order:2;width:calc(100% - 88px)}.filter-button{margin-left:auto}.view-button{display:none}.contacts-content{padding:10px}.companies-grid{grid-template-columns:repeat(2,minmax(170px,1fr))}.contacts-topbar{padding:14px}.contacts-actions button:not(.primary){display:none}.advanced-filters{flex-wrap:wrap}.bulk-bar{left:85px;right:10px;top:134px;overflow:auto}.bulk-bar button:nth-of-type(n+3){display:none}}
 @media(max-width:650px){.contacts-app{display:block;height:100dvh}.contacts-workspace{height:calc(100dvh - 62px)}.contacts-topbar{height:70px;padding-right:72px}.contacts-topbar h1{font-size:20px}.contacts-tabs{padding:0 14px;height:43px}.contacts-toolbar{padding:10px}.contacts-content{padding:8px;overflow:auto}.contacts-table-wrap{min-width:0;border:0;background:transparent}.contacts-table,.contacts-table tbody{display:block}.contacts-table thead{display:none}.contacts-table tr{display:grid;grid-template-columns:32px minmax(0,1fr) auto;background:#fff;border:1px solid #e4e0e8;border-radius:10px;margin-bottom:7px;padding:9px}.contacts-table td{height:auto;border:0!important;padding:3px}.contacts-table td:nth-child(1){grid-row:1/4;align-self:center}.contacts-table td:nth-child(2){grid-column:2}.contacts-table td:nth-child(3){grid-column:2}.contacts-table td:nth-child(4){grid-column:2}.contacts-table td:nth-child(5){display:none}.contacts-table td:nth-child(6){grid-column:3;grid-row:1}.contacts-table td:nth-child(7){grid-column:3;grid-row:2;text-align:right}.contacts-table td:nth-child(8){display:none}.contact-cell>span{width:38px;height:38px}.contact-cell small,.company-cell i,.contact-info span{display:none}.company-cell{color:#817a89}.contact-info small{display:block}.contacts-footer{height:38px;padding:0 10px}.contacts-footer div,.contacts-footer label{display:none}.companies-grid{grid-template-columns:1fr}.advanced-filters{position:absolute;z-index:15;left:8px;right:8px;top:170px;border:1px solid #ddd9e3;border-radius:10px;box-shadow:0 15px 35px rgba(15,8,32,.2)}.advanced-filters label,.advanced-filters select{width:100%}.bulk-bar{left:8px;top:116px}.contact-drawer{height:calc(100dvh - 62px);top:0;width:100%}.contact-drawer-overlay.open{display:block}.contact-modal{padding:8px}.contact-modal form{padding:16px}.form-row{grid-template-columns:1fr}.contact-modal .form-row label{margin-bottom:2px}html[data-theme="dark"] .contacts-table tr{background:#17141f;border-color:#302a39}}
+
+/* NOIRA Black — Contatos */
+html[data-theme="dark"] .contacts-app,
+html[data-theme="dark"] .contacts-workspace,
+html[data-theme="dark"] .contacts-content{background:var(--noira-black);color:var(--noira-text)}
+html[data-theme="dark"] .contacts-topbar,
+html[data-theme="dark"] .contacts-tabs,
+html[data-theme="dark"] .contacts-toolbar,
+html[data-theme="dark"] .advanced-filters,
+html[data-theme="dark"] .contacts-footer{background:var(--noira-surface);border-color:var(--noira-line)}
+html[data-theme="dark"] .contacts-table-wrap,
+html[data-theme="dark"] .companies-grid article,
+html[data-theme="dark"] .contact-drawer,
+html[data-theme="dark"] .contact-modal form{background:var(--noira-card);border-color:var(--noira-line);color:var(--noira-text)}
+html[data-theme="dark"] .contacts-search,
+html[data-theme="dark"] .contacts-actions button:not(.primary),
+html[data-theme="dark"] .filter-button,
+html[data-theme="dark"] .view-button,
+html[data-theme="dark"] .contacts-footer button,
+html[data-theme="dark"] .contacts-footer label,
+html[data-theme="dark"] .advanced-filters select,
+html[data-theme="dark"] .contact-shortcuts a,
+html[data-theme="dark"] .contact-shortcuts button,
+html[data-theme="dark"] .linked-deal,
+html[data-theme="dark"] .drawer-task,
+html[data-theme="dark"] .contact-modal input,
+html[data-theme="dark"] .contact-modal select{background:var(--noira-surface);color:var(--noira-text);border-color:var(--noira-line)}
+html[data-theme="dark"] .contacts-actions .primary{background:var(--noira-action);border-color:#2B83FF;color:#fff}
+html[data-theme="dark"] .contacts-table th{background:var(--noira-surface);border-color:var(--noira-line);color:#C7D0DD}
+html[data-theme="dark"] .contacts-table td{border-color:var(--noira-line)}
+html[data-theme="dark"] .contacts-table tbody tr:hover,
+html[data-theme="dark"] .contacts-table tr.opened{background:var(--noira-hover)}
+@media(max-width:650px){html[data-theme="dark"] .contacts-table tr{background:var(--noira-card);border-color:var(--noira-line)}}

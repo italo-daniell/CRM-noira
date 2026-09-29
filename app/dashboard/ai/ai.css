@@ -3,3 +3,40 @@ html[data-theme="dark"] .noira-ai-app{background:#0e0b17;color:#f4f1ff}html[data
 @media(max-width:1250px){.noira-ai-app{grid-template-columns:75px 205px minmax(460px,1fr) 290px}.ai-hero h2{font-size:22px}.agent-status{width:205px}.opportunity>div{grid-template-columns:1fr}.opportunity article small{font-size:7px}}
 @media(max-width:980px){.noira-ai-app{grid-template-columns:75px 190px minmax(0,1fr)}.ai-copilot{position:fixed;z-index:45;right:0;top:0;bottom:0;width:min(330px,92vw);box-shadow:-15px 0 40px rgba(18,10,35,.18);transform:translateX(105%);transition:.23s}.ai-copilot.open{transform:translateX(0)}.ai-mobile-test{display:block!important}.ai-overview-grid,.automation-layout,.analyst-grid{grid-template-columns:1fr}.agent-grid{grid-template-columns:1fr 1fr}.ai-hero{display:block}.agent-status{margin-top:18px;width:100%}}
 @media(max-width:650px){.noira-ai-app{display:block;height:100dvh;padding-bottom:62px}.ai-module-nav{position:sticky;top:0;z-index:18;height:55px;padding:5px 8px;display:block;border-bottom:1px solid #e4e0e8}.ai-module-nav>header,.ai-credit{display:none}.ai-module-nav nav{height:45px;padding:0;display:flex;overflow:auto;gap:3px}.ai-module-nav nav button{min-width:max-content;min-height:40px;padding:5px 9px}.ai-module-nav nav button>i{width:24px;height:24px}.ai-module-nav nav small{display:none}.ai-center{height:calc(100dvh - 117px)}.ai-topbar{height:62px;padding:0 10px}.ai-topbar h1{font-size:18px}.ai-help,.ai-primary{display:none}.ai-content{padding:10px}.ai-hero{padding:18px;min-height:270px}.ai-hero h2{font-size:23px}.ai-hero p{font-size:10px}.ai-metrics{grid-template-columns:1fr 1fr}.ai-overview-grid{grid-template-columns:1fr}.opportunity>header{display:block}.opportunity>header button{margin-top:8px}.agent-grid{grid-template-columns:1fr}.knowledge-stats{grid-template-columns:1fr}.analyst-prompts{grid-template-columns:1fr}.section-heading{align-items:center}.section-heading h2{font-size:17px}.section-heading p{display:none}.source-list>header button{display:none}.source-types{grid-template-columns:1fr 1fr 1fr}.ai-copilot{bottom:62px}.ai-modal{padding:8px 8px 65px}.ai-toast{left:10px;right:10px;bottom:72px;text-align:center}}
+
+/* NOIRA Black — Inteligência artificial */
+html[data-theme="dark"] .noira-ai-app,
+html[data-theme="dark"] .ai-center,
+html[data-theme="dark"] .ai-content{background:var(--noira-black);color:var(--noira-text)}
+html[data-theme="dark"] .ai-module-nav,
+html[data-theme="dark"] .ai-topbar,
+html[data-theme="dark"] .ai-copilot{background:var(--noira-surface);border-color:var(--noira-line);color:var(--noira-text)}
+html[data-theme="dark"] .ai-metrics article,
+html[data-theme="dark"] .ai-panel,
+html[data-theme="dark"] .agent-card,
+html[data-theme="dark"] .add-agent-card,
+html[data-theme="dark"] .knowledge-stats article,
+html[data-theme="dark"] .analyst-prompts button,
+html[data-theme="dark"] .ai-modal form{background:var(--noira-card);border-color:var(--noira-line);color:var(--noira-text);box-shadow:0 10px 30px rgba(0,0,0,.22)}
+html[data-theme="dark"] .ai-module-nav nav button.active{background:#14284A;color:#DCEAFF;box-shadow:inset 3px 0 0 var(--noira-action)}
+html[data-theme="dark"] .ai-module-nav nav button>i,
+html[data-theme="dark"] .ai-credit,
+html[data-theme="dark"] .recent-row>i,
+html[data-theme="dark"] .action-list label>i,
+html[data-theme="dark"] .copilot-modes{background:var(--noira-surface);border-color:var(--noira-line)}
+html[data-theme="dark"] .ai-topbar button:not(.ai-primary),
+html[data-theme="dark"] .ai-panel header select,
+html[data-theme="dark"] .ai-panel header button,
+html[data-theme="dark"] .quick-actions button,
+html[data-theme="dark"] .ai-copilot form,
+html[data-theme="dark"] .ai-modal input,
+html[data-theme="dark"] .ai-modal select,
+html[data-theme="dark"] .ai-modal textarea{background:var(--noira-surface);border-color:var(--noira-line);color:var(--noira-text)}
+html[data-theme="dark"] .ai-primary{background:var(--noira-action);border-color:#2B83FF;color:#fff}
+html[data-theme="dark"] .agent-card p,
+html[data-theme="dark"] .action-list label small,
+html[data-theme="dark"] .section-heading p{color:var(--noira-muted)}
+html[data-theme="dark"] .agent-card>div span,
+html[data-theme="dark"] .copilot-messages p,
+html[data-theme="dark"] .copilot-context{background:var(--noira-surface);color:#D5DDE8;border-color:var(--noira-line)}
+html[data-theme="dark"] .analyst-alert{background:#151F33;border:1px solid #263B5D}

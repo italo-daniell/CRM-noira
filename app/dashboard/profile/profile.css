@@ -2,3 +2,30 @@
 html[data-theme="dark"] .profile-app{background:#0d0b18;color:#f5f2ff}html[data-theme="dark"] .settings-nav,html[data-theme="dark"] .profile-card,html[data-theme="dark"] .security-card,html[data-theme="dark"] .sessions-table,html[data-theme="dark"] .notification-table,html[data-theme="dark"] .secondary-card{background:#191620;border-color:#312b3a;color:#f5f2ff}html[data-theme="dark"] .settings-nav{border-color:#302a38}html[data-theme="dark"] .settings-nav>header,html[data-theme="dark"] .notification-table>div,html[data-theme="dark"] .notification-table>header span+span,html[data-theme="dark"] .notification-table>div>*+*,html[data-theme="dark"] .sessions-table>header{border-color:#312c38}html[data-theme="dark"] .settings-nav button,html[data-theme="dark"] .settings-nav a{color:#c9c3d2}html[data-theme="dark"] .settings-nav button:hover,html[data-theme="dark"] .settings-nav a:hover{background:#25202d}html[data-theme="dark"] .settings-nav button.active{background:#28213e;color:#a68aff}html[data-theme="dark"] .field-row input,html[data-theme="dark"] .field-row select,html[data-theme="dark"] .field-row textarea,html[data-theme="dark"] .secondary-card input,html[data-theme="dark"] .secondary-card select,html[data-theme="dark"] .save-top{background:#211d28;border-color:#3b3543;color:#f5f2ff}html[data-theme="dark"] .field-row>label{color:#c8c2cf}html[data-theme="dark"] .profile-photo label i{border-color:#191620}html[data-theme="dark"] .profile-toast{background:#7047e8}
 @media(max-width:1050px){.profile-app{grid-template-columns:76px 210px minmax(0,1fr)}.profile-card{grid-template-columns:125px minmax(390px,1fr);padding:28px 20px}.profile-photo label{width:98px;height:98px}.field-row{grid-template-columns:112px 1fr}.notification-table>header,.notification-table>div{grid-template-columns:1.2fr 1fr .7fr .7fr}}
 @media(max-width:760px){.profile-app{height:auto;min-height:100vh;display:block;padding-bottom:62px}.profile-app .dash-side{padding:6px 10px}.profile-app .dash-side nav a{font-size:17px}.settings-nav{position:sticky;top:0;z-index:10;border-right:0;border-bottom:1px solid #ddd;overflow:hidden}.settings-nav>header{height:48px}.settings-nav nav{display:flex;overflow-x:auto;padding:6px}.settings-nav section{display:flex;margin:0;flex:0 0 auto}.settings-nav section>small{display:none}.settings-nav button,.settings-nav a{white-space:nowrap;min-height:35px}.settings-nav button span{display:inline}.profile-main{overflow:visible;padding:14px 12px 80px}.profile-main>header{position:relative}.profile-main h1{font-size:18px}.profile-card{grid-template-columns:1fr;min-height:0;padding:22px 14px}.profile-photo{margin-bottom:8px}.profile-fields{gap:13px}.field-row{grid-template-columns:1fr;gap:6px}.field-row>label,.field-row.identity label{padding:0}.inline-field{grid-template-columns:1fr}.inline-field>button{text-align:left}.save-top{display:none}.security-card{gap:20px}.sessions-table{overflow-x:auto}.sessions-table>header,.sessions-table>div{min-width:660px}.notification-title{align-items:flex-start;gap:15px}.notification-title>label{font-size:0}.notification-table{overflow-x:auto}.notification-table>header,.notification-table>div{min-width:760px}.mobile-save{display:block;position:sticky;bottom:72px;padding:12px 0}.mobile-save button{width:100%;height:44px;border:0;border-radius:7px;background:#7047e8;color:#fff;font-weight:800}.secondary-card>label{grid-template-columns:1fr}.profile-toast{bottom:76px;left:12px;right:12px;text-align:center}}
+
+/* NOIRA Black — Perfil */
+html[data-theme="dark"] .profile-app,
+html[data-theme="dark"] .profile-main{background:var(--noira-black);color:var(--noira-text)}
+html[data-theme="dark"] .settings-nav{background:var(--noira-surface);border-color:var(--noira-line);color:var(--noira-text)}
+html[data-theme="dark"] .profile-card,
+html[data-theme="dark"] .security-card,
+html[data-theme="dark"] .sessions-table,
+html[data-theme="dark"] .notification-table,
+html[data-theme="dark"] .secondary-card{background:var(--noira-card);border-color:var(--noira-line);color:var(--noira-text);box-shadow:0 10px 30px rgba(0,0,0,.22)}
+html[data-theme="dark"] .settings-nav button,
+html[data-theme="dark"] .settings-nav a{color:#C8D1DE}
+html[data-theme="dark"] .settings-nav button:hover,
+html[data-theme="dark"] .settings-nav a:hover{background:var(--noira-hover)}
+html[data-theme="dark"] .settings-nav button.active{background:#14284A;color:#DCEAFF;box-shadow:inset 3px 0 0 var(--noira-action)}
+html[data-theme="dark"] .field-row input,
+html[data-theme="dark"] .field-row select,
+html[data-theme="dark"] .field-row textarea,
+html[data-theme="dark"] .secondary-card input,
+html[data-theme="dark"] .secondary-card select,
+html[data-theme="dark"] .save-top{background:var(--noira-surface);border-color:var(--noira-line);color:var(--noira-text)}
+html[data-theme="dark"] .field-row input:focus,
+html[data-theme="dark"] .field-row select:focus,
+html[data-theme="dark"] .field-row textarea:focus{border-color:var(--noira-action);box-shadow:0 0 0 3px rgba(9,107,255,.18)}
+html[data-theme="dark"] .field-row>label{color:#C5CEDA}
+html[data-theme="dark"] .profile-toast,
+html[data-theme="dark"] .mobile-save button{background:var(--noira-action)}

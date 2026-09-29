@@ -8,3 +8,38 @@
 html[data-theme="dark"] .admin-app{background:#0c0913;color:#f7f3fb}html[data-theme="dark"] .admin-nav,html[data-theme="dark"] .admin-top,html[data-theme="dark"] .admin-kpis article,html[data-theme="dark"] .admin-panel,html[data-theme="dark"] .user-row{background:#18141f;border-color:#342e3c}html[data-theme="dark"] .admin-nav nav button{color:#c8c0d0}html[data-theme="dark"] .admin-nav nav button:hover{background:#241d2f}html[data-theme="dark"] .admin-nav nav button.active{background:#31244d;color:#fff}html[data-theme="dark"] .admin-nav nav button>i{background:#282131}html[data-theme="dark"] .admin-top select,html[data-theme="dark"] .admin-top button,html[data-theme="dark"] .revenue-chart header select,html[data-theme="dark"] .usage>button,html[data-theme="dark"] .admin-panel header button,html[data-theme="dark"] .permission-row select{background:#231e2b;color:#f8f4fb;border-color:#403748}html[data-theme="dark"] .attention>div,html[data-theme="dark"] .team-summary>div,html[data-theme="dark"] .bill-row,html[data-theme="dark"] .invoice-list>div,html[data-theme="dark"] .security-settings>label,html[data-theme="dark"] .audit-list>div{border-color:#322b39}html[data-theme="dark"] .table-head,html[data-theme="dark"] .permission-grid>span,html[data-theme="dark"] .webhook-card>div,html[data-theme="dark"] .member-profile{background:#211b29}html[data-theme="dark"] .permission-grid,html[data-theme="dark"] .permission-row>*{border-color:#332c3a}html[data-theme="dark"] .security-banner,html[data-theme="dark"] .admin-nav>footer{background:#16231a;border-color:#29432e}html[data-theme="dark"] .admin-modal form,html[data-theme="dark"] .member-dialog{background:#191520;color:#f7f3fb}html[data-theme="dark"] .admin-modal input,html[data-theme="dark"] .admin-modal select,html[data-theme="dark"] .admin-modal footer button{background:#241f2b;color:#f7f3fb;border-color:#403847}html[data-theme="dark"] .admin-modal form>p{background:#251e30}html[data-theme="dark"] .admin-gate{background:radial-gradient(circle at 30% 20%,#2c2148,#0d0915 48%);color:#f6f1fb}html[data-theme="dark"] .admin-gate section{background:#191520;border-color:#3a3241}html[data-theme="dark"] .admin-gate p b{color:#f5f1fb}
 @media(max-width:1100px){.admin-app{grid-template-columns:75px 210px 1fr}.admin-kpis{grid-template-columns:1fr 1fr}.integration-grid{grid-template-columns:1fr 1fr}.admin-grid,.admin-grid.lower{grid-template-columns:1fr}.admin-main{min-width:0}}
 @media(max-width:760px){.admin-app{height:auto;min-height:100dvh;overflow:visible;display:block;padding-bottom:62px}.admin-app>.dash-side{display:block}.admin-nav{position:sticky;top:0;z-index:15;padding:8px 10px;border:0;border-bottom:1px solid #e1dce7;display:block}.admin-nav>header,.admin-nav>footer{display:none}.admin-nav nav{display:flex;overflow:auto;gap:6px}.admin-nav nav button{min-width:max-content;min-height:38px;padding:5px 9px}.admin-nav nav button>i,.admin-nav nav button small{display:none}.admin-top{position:relative;height:auto;padding:15px 12px;align-items:flex-start;gap:12px}.admin-top h1{font-size:20px}.admin-top>div:last-child{flex-wrap:wrap;justify-content:flex-end}.admin-top button{font-size:0;width:36px;padding:0}.admin-top button:first-letter{font-size:13px}.admin-top button.primary{width:auto;font-size:8px}.admin-content{padding:13px 10px 30px}.admin-kpis{grid-template-columns:1fr 1fr}.admin-kpis strong{font-size:17px}.pipeline-admin-grid,.integration-grid{grid-template-columns:1fr}.table-head{display:none}.user-row{grid-template-columns:1fr auto auto;padding:12px}.user-row>span:nth-of-type(2),.user-row>span:nth-of-type(3){display:none}.permission-grid{display:block}.permission-grid>span{display:none}.permission-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;align-items:center}.permission-row>*{min-width:0;padding:8px 5px}.permission-row select{width:calc(100% - 6px);font-size:7px}.section-intro{align-items:flex-start;gap:9px}.section-intro h2{font-size:15px}.section-intro p{font-size:8px}.billing-hero{display:block}.billing-hero aside{margin-top:15px;min-width:0}.webhook-card>div{grid-template-columns:1fr auto}.webhook-card span{display:none}.chart-bars{gap:5px}.admin-toast{left:10px;right:10px;bottom:72px;text-align:center}}
+
+/* NOIRA Black — Administração */
+html[data-theme="dark"] .admin-app,
+html[data-theme="dark"] .admin-main,
+html[data-theme="dark"] .admin-content{background:var(--noira-black);color:var(--noira-text)}
+html[data-theme="dark"] .admin-nav,
+html[data-theme="dark"] .admin-top{background:var(--noira-surface);border-color:var(--noira-line)}
+html[data-theme="dark"] .admin-kpis article,
+html[data-theme="dark"] .admin-panel,
+html[data-theme="dark"] .user-row,
+html[data-theme="dark"] .admin-modal form,
+html[data-theme="dark"] .member-dialog{background:var(--noira-card);border-color:var(--noira-line);color:var(--noira-text);box-shadow:0 10px 30px rgba(0,0,0,.22)}
+html[data-theme="dark"] .admin-nav nav button{color:#C8D1DE}
+html[data-theme="dark"] .admin-nav nav button:hover{background:var(--noira-hover)}
+html[data-theme="dark"] .admin-nav nav button.active{background:#14284A;color:#DCEAFF;box-shadow:inset 3px 0 0 var(--noira-action)}
+html[data-theme="dark"] .admin-nav nav button>i,
+html[data-theme="dark"] .table-head,
+html[data-theme="dark"] .permission-grid>span,
+html[data-theme="dark"] .webhook-card>div,
+html[data-theme="dark"] .member-profile{background:var(--noira-surface);border-color:var(--noira-line)}
+html[data-theme="dark"] .admin-top select,
+html[data-theme="dark"] .admin-top button,
+html[data-theme="dark"] .revenue-chart header select,
+html[data-theme="dark"] .usage>button,
+html[data-theme="dark"] .admin-panel header button,
+html[data-theme="dark"] .permission-row select,
+html[data-theme="dark"] .admin-modal input,
+html[data-theme="dark"] .admin-modal select,
+html[data-theme="dark"] .admin-modal footer button{background:var(--noira-surface);color:var(--noira-text);border-color:var(--noira-line)}
+html[data-theme="dark"] .admin-top button.primary,
+html[data-theme="dark"] .admin-panel header button.primary{background:var(--noira-action);border-color:#2B83FF;color:#fff}
+html[data-theme="dark"] .security-banner,
+html[data-theme="dark"] .admin-nav>footer{background:#0C2018;border-color:#1E503A}
+html[data-theme="dark"] .admin-gate{background:radial-gradient(circle at 30% 20%,rgba(9,107,255,.16),transparent 42%),var(--noira-black);color:var(--noira-text)}
+html[data-theme="dark"] .admin-gate section{background:var(--noira-card);border-color:var(--noira-line)}

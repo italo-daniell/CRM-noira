@@ -2,3 +2,36 @@
 html[data-theme="dark"] .calendar-app,html[data-theme="dark"] .calendar-workspace{background:#0d0b18;color:#f4f1ff}html[data-theme="dark"] .calendar-topbar,html[data-theme="dark"] .calendar-filters,html[data-theme="dark"] .calendar-sidebar,html[data-theme="dark"] .agenda-content,html[data-theme="dark"] .week-header,html[data-theme="dark"] .week-header button,html[data-theme="dark"] .month-grid>button{background:#17141f;border-color:#302b38}html[data-theme="dark"] .agenda-search,html[data-theme="dark"] .calendar-actions button:not(.primary),html[data-theme="dark"] .calendar-filters>select,html[data-theme="dark"] .date-navigation button,html[data-theme="dark"] .google-sync,html[data-theme="dark"] .zoom-switch button.active{background:#211d2a;color:#f4f1ff;border-color:#38323f}html[data-theme="dark"] .zoom-switch{background:#27222f}html[data-theme="dark"] .week-header,html[data-theme="dark"] .all-day-row,html[data-theme="dark"] .day-column,html[data-theme="dark"] .day-column>i,html[data-theme="dark"] .time-column span,html[data-theme="dark"] .month-calendar>header,html[data-theme="dark"] .month-grid>button,html[data-theme="dark"] .day-calendar>header,html[data-theme="dark"] .day-hour span{border-color:#302b38}html[data-theme="dark"] .task-board{background:#100e18}html[data-theme="dark"] .task-board>section{background:#201c29}html[data-theme="dark"] .task-board article,html[data-theme="dark"] .task-list,html[data-theme="dark"] .task-list>article{background:#17141f;border-color:#302b38}html[data-theme="dark"] .task-list>header{background:#211d2a}html[data-theme="dark"] .task-list>article:hover{background:#28213d}html[data-theme="dark"] .event-drawer,html[data-theme="dark"] .event-modal form{background:#17141f;color:#f4f1ff}html[data-theme="dark"] .event-drawer>header,html[data-theme="dark"] .event-drawer-title,html[data-theme="dark"] .event-details section,html[data-theme="dark"] .event-modal footer{border-color:#302b38}html[data-theme="dark"] .event-modal input,html[data-theme="dark"] .event-modal select,html[data-theme="dark"] .event-modal textarea,html[data-theme="dark"] .event-type-switch span{background:#211d2a;color:#f4f1ff;border-color:#3a3442}
 @media(max-width:1100px){.calendar-app{grid-template-columns:75px minmax(0,1fr)}.calendar-body{grid-template-columns:190px minmax(0,1fr)}.calendar-sections span{display:none}.calendar-actions .settings{display:none}.agenda-search{display:none}}
 @media(max-width:720px){.calendar-app{display:block;height:100dvh}.calendar-workspace{height:calc(100dvh - 62px)}.calendar-topbar{height:66px;padding:8px 70px 8px 12px;gap:8px}.calendar-topbar h1{font-size:19px}.calendar-sections{margin-left:auto}.calendar-sections button{padding:0 8px;font-size:13px}.calendar-actions{margin-left:0}.calendar-actions .primary{width:34px;padding:0;font-size:0}.calendar-actions .primary:first-letter{font-size:16px}.calendar-filters{height:51px;padding:7px 9px}.date-navigation b{font-size:8px}.date-navigation button:nth-child(2){display:none}.calendar-filters>select{display:none}.zoom-switch{margin-left:auto}.zoom-switch button{padding:0 7px}.mobile-filter{display:block;border:1px solid #ded9e4;background:#fff;border-radius:7px;height:32px}.calendar-body{display:block;position:relative}.calendar-sidebar{position:absolute;z-index:15;left:0;top:0;bottom:0;width:220px;transform:translateX(-105%);transition:transform .22s;box-shadow:16px 0 35px rgba(20,12,40,.15)}.calendar-body.menu-open .calendar-sidebar{transform:translateX(0)}.agenda-content{height:100%}.week-calendar{min-width:690px}.week-header,.all-day-row,.week-grid{grid-template-columns:45px repeat(7,92px)}.time-column span{height:60px}.day-column>i{height:60px}.agenda-event{padding:4px;left:2px;right:2px}.agenda-event strong{font-size:6px}.agenda-event span{display:none}.task-board{grid-template-columns:repeat(4,210px);min-width:max-content}.task-list{min-width:680px;margin:8px}.task-list>header,.task-list>article{grid-template-columns:minmax(170px,1.4fr) 110px 90px 110px 75px 25px}.event-drawer{width:100%;height:calc(100dvh - 62px)}.event-overlay.open{display:block}.event-modal{padding:6px}.event-modal form{padding:15px}.event-type-switch{grid-template-columns:1fr 1fr}.event-form-row,.event-form-row.two{grid-template-columns:1fr 1fr}.event-form-row label:last-child:nth-child(3){grid-column:1/-1}}
+
+/* NOIRA Black — Agenda */
+html[data-theme="dark"] .calendar-app,
+html[data-theme="dark"] .calendar-workspace,
+html[data-theme="dark"] .calendar-body{background:var(--noira-black);color:var(--noira-text)}
+html[data-theme="dark"] .calendar-topbar,
+html[data-theme="dark"] .calendar-filters,
+html[data-theme="dark"] .calendar-sidebar,
+html[data-theme="dark"] .agenda-content,
+html[data-theme="dark"] .week-header{background:var(--noira-surface);border-color:var(--noira-line)}
+html[data-theme="dark"] .week-header button,
+html[data-theme="dark"] .month-grid>button,
+html[data-theme="dark"] .task-board article,
+html[data-theme="dark"] .task-list,
+html[data-theme="dark"] .task-list>article,
+html[data-theme="dark"] .event-drawer,
+html[data-theme="dark"] .event-modal form{background:var(--noira-card);border-color:var(--noira-line);color:var(--noira-text)}
+html[data-theme="dark"] .agenda-search,
+html[data-theme="dark"] .calendar-actions button:not(.primary),
+html[data-theme="dark"] .calendar-filters>select,
+html[data-theme="dark"] .date-navigation button,
+html[data-theme="dark"] .google-sync,
+html[data-theme="dark"] .event-modal input,
+html[data-theme="dark"] .event-modal select,
+html[data-theme="dark"] .event-modal textarea,
+html[data-theme="dark"] .event-type-switch span{background:var(--noira-card);color:var(--noira-text);border-color:var(--noira-line)}
+html[data-theme="dark"] .calendar-actions .primary{background:var(--noira-action);border-color:#2B83FF;color:#fff}
+html[data-theme="dark"] .zoom-switch{background:#080A10}
+html[data-theme="dark"] .zoom-switch button.active{background:#14284A;border-color:var(--noira-action);color:#DCEAFF}
+html[data-theme="dark"] .task-board{background:var(--noira-black)}
+html[data-theme="dark"] .task-board>section,
+html[data-theme="dark"] .task-list>header{background:var(--noira-surface)}
+html[data-theme="dark"] .task-list>article:hover{background:var(--noira-hover)}
