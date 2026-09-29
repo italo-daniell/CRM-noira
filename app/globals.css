@@ -17,6 +17,11 @@ html[data-theme="dark"]{color-scheme:dark;--paper:#0d0b18;--soft:#171326;--line:
 .theme-toggle{width:72px;height:38px;padding:4px;border:1px solid rgba(110,92,150,.25);border-radius:999px;background:#ece8f7;color:#554b70;display:flex;align-items:center;justify-content:space-between;position:relative;cursor:pointer;box-shadow:0 8px 24px rgba(21,13,49,.15);transition:background .25s,border-color .25s,transform .2s}
 .theme-toggle:hover{transform:translateY(-1px)}
 .theme-toggle span{width:28px;position:relative;z-index:2;font-size:15px;line-height:28px;text-align:center}
+.theme-toggle .theme-icon{width:17px;height:17px;position:relative;z-index:2;margin:0 5px;flex:0 0 17px}
+.dash-theme .theme-toggle-dashboard .theme-icon{width:14px;height:14px;flex-basis:14px;margin:0 4px}
+@media(max-width:1100px){.dash-theme .theme-toggle-dashboard .theme-icon{width:11px;height:11px;flex-basis:11px;margin:0 1px}}
+@media(max-width:900px){.nav .theme-toggle-site .theme-icon{width:14px;height:14px;flex-basis:14px;margin:0 4px}}
+@media(max-width:650px){.dash-nav-theme .theme-toggle-dashboard .theme-icon{width:11px;height:11px;flex-basis:11px;margin:0 1px}}
 .theme-toggle i{position:absolute;z-index:1;left:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 3px 10px rgba(20,12,44,.2);transition:transform .28s cubic-bezier(.2,.8,.2,1),background .25s}
 .theme-toggle-site{flex:0 0 auto;margin-left:auto}.nav .theme-toggle-site+.menu-btn+.nav-actions{margin-left:0}
 .dash-theme{margin-top:auto;border-top:1px solid #302946;padding:14px 5px 0;display:flex;align-items:center;justify-content:space-between;gap:8px}.dash-theme>span{font-size:8px;color:#aaa4ba;font-weight:800}.dash-theme .theme-toggle-dashboard{width:62px;height:34px;box-shadow:none}.dash-theme .theme-toggle-dashboard i{width:24px;height:24px;top:4px}.dash-theme .theme-toggle-dashboard span{width:24px;font-size:12px}.dash-nav-theme{display:none}

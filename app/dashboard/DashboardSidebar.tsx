@@ -3,11 +3,11 @@
 import {
   CalendarDays,
   ChartNoAxesCombined,
-  ContactRound,
   LayoutDashboard,
-  MessageSquareText,
+  MessageSquare,
   ShieldCheck,
   Sparkles,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { ThemeToggle } from "../ThemeToggle";
@@ -29,8 +29,8 @@ type NavigationItem = {
 
 const navigationItems: NavigationItem[] = [
   { id: "pipeline", label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { id: "conversations", label: "Conversas", href: "/dashboard/conversations", icon: MessageSquareText, badge: "9" },
-  { id: "contacts", label: "Contatos", href: "/dashboard/contacts", icon: ContactRound },
+  { id: "conversations", label: "Conversas", href: "/dashboard/conversations", icon: MessageSquare, badge: "9" },
+  { id: "contacts", label: "Contatos", href: "/dashboard/contacts", icon: Users },
   { id: "calendar", label: "Agenda", href: "/dashboard/calendar", icon: CalendarDays },
   { id: "reports", label: "Relatórios", href: "/dashboard/reports", icon: ChartNoAxesCombined },
   { id: "ai", label: "NOIRA IA", href: "/dashboard/ai", icon: Sparkles },
