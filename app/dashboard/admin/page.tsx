@@ -1,5 +1,6 @@
 import { chatGPTSignInPath, getChatGPTUser } from "../../chatgpt-auth";
 import { AdminDashboard } from "./AdminDashboard";
+import "../dashboard.css";
 import "./admin.css";
 
 export const dynamic = "force-dynamic";
