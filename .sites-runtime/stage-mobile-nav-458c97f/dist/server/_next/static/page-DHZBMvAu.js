@@ -1,0 +1,1 @@
+import{t as e}from"./rsc-CZyW4WwX.js";import{t}from"./framework~index~page~layout~page~app-page-cache-render~app-page-cache~app-route-handler-dispatch-B_3u-5ix.js";var n=e(()=>{throw Error(`Unexpectedly client reference export 'HomeClient' is called on server`)},`82b1d810973c`,`HomeClient`),r=t();function i(){return(0,r.jsx)(n,{})}export{i as default};

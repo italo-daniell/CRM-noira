@@ -1,0 +1,194 @@
+{
+  "_DashboardSidebar-BwJ__pbG.js": {
+    "file": "_next/static/chunks/DashboardSidebar-BwJ__pbG.js",
+    "name": "DashboardSidebar",
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_ThemeToggle-CMcgubmX.js",
+      "_framework-BgSIrAUN.js"
+    ]
+  },
+  "_ThemeToggle-CMcgubmX.js": {
+    "file": "_next/static/chunks/ThemeToggle-CMcgubmX.js",
+    "name": "ThemeToggle",
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_framework-BgSIrAUN.js"
+    ]
+  },
+  "_dashboard.CM7n3akA.css": {
+    "file": "_next/static/css/dashboard.CM7n3akA.css",
+    "src": "_dashboard.CM7n3akA.css"
+  },
+  "_framework-BgSIrAUN.js": {
+    "file": "_next/static/chunks/framework-BgSIrAUN.js",
+    "name": "framework",
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js"
+    ]
+  },
+  "_rolldown-runtime-C60lm6uB.js": {
+    "file": "_next/static/chunks/rolldown-runtime-C60lm6uB.js",
+    "name": "rolldown-runtime"
+  },
+  "app/HomeClient.tsx": {
+    "file": "_next/static/chunks/HomeClient-77LMLxTm.js",
+    "name": "HomeClient",
+    "src": "app/HomeClient.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_ThemeToggle-CMcgubmX.js",
+      "_framework-BgSIrAUN.js"
+    ]
+  },
+  "app/dashboard/admin/AdminDashboard.tsx": {
+    "file": "_next/static/chunks/AdminDashboard-Ceec6h-l.js",
+    "name": "AdminDashboard",
+    "src": "app/dashboard/admin/AdminDashboard.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_DashboardSidebar-BwJ__pbG.js",
+      "_framework-BgSIrAUN.js"
+    ]
+  },
+  "app/dashboard/ai/page.tsx": {
+    "file": "_next/static/chunks/page-CcUe9foG.js",
+    "name": "page",
+    "src": "app/dashboard/ai/page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_DashboardSidebar-BwJ__pbG.js",
+      "_framework-BgSIrAUN.js"
+    ],
+    "css": [
+      "_next/static/css/page.QTLfY113.css",
+      "_next/static/css/dashboard.CM7n3akA.css"
+    ]
+  },
+  "app/dashboard/calendar/page.tsx": {
+    "file": "_next/static/chunks/page-JriwMH3w.js",
+    "name": "page",
+    "src": "app/dashboard/calendar/page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_DashboardSidebar-BwJ__pbG.js",
+      "_framework-BgSIrAUN.js"
+    ],
+    "css": [
+      "_next/static/css/page.t26DkQOg.css",
+      "_next/static/css/dashboard.CM7n3akA.css"
+    ]
+  },
+  "app/dashboard/contacts/page.tsx": {
+    "file": "_next/static/chunks/page-DHANlUmK.js",
+    "name": "page",
+    "src": "app/dashboard/contacts/page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_DashboardSidebar-BwJ__pbG.js",
+      "_framework-BgSIrAUN.js"
+    ],
+    "css": [
+      "_next/static/css/page.DUSP3-Tj.css",
+      "_next/static/css/dashboard.CM7n3akA.css"
+    ]
+  },
+  "app/dashboard/conversations/page.tsx": {
+    "file": "_next/static/chunks/page-ImSX3ekE.js",
+    "name": "page",
+    "src": "app/dashboard/conversations/page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_DashboardSidebar-BwJ__pbG.js",
+      "_framework-BgSIrAUN.js"
+    ],
+    "css": [
+      "_next/static/css/page.CNCMKBWI.css",
+      "_next/static/css/dashboard.CM7n3akA.css"
+    ]
+  },
+  "app/dashboard/page.tsx": {
+    "file": "_next/static/chunks/page-C6-1OoIM.js",
+    "name": "page",
+    "src": "app/dashboard/page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_DashboardSidebar-BwJ__pbG.js",
+      "_framework-BgSIrAUN.js"
+    ],
+    "css": [
+      "_next/static/css/dashboard.CM7n3akA.css"
+    ]
+  },
+  "app/dashboard/profile/page.tsx": {
+    "file": "_next/static/chunks/page-5ZOL3Dua.js",
+    "name": "page",
+    "src": "app/dashboard/profile/page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_DashboardSidebar-BwJ__pbG.js",
+      "_framework-BgSIrAUN.js"
+    ],
+    "css": [
+      "_next/static/css/page.DlylvkXw.css",
+      "_next/static/css/dashboard.CM7n3akA.css"
+    ]
+  },
+  "app/dashboard/reports/page.tsx": {
+    "file": "_next/static/chunks/page-D9I-NgoZ.js",
+    "name": "page",
+    "src": "app/dashboard/reports/page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_DashboardSidebar-BwJ__pbG.js",
+      "_framework-BgSIrAUN.js"
+    ],
+    "css": [
+      "_next/static/css/page.CRj-rIch.css",
+      "_next/static/css/dashboard.CM7n3akA.css"
+    ]
+  },
+  "node_modules/.pnpm/vinext@1.0.0-beta.2_@vitejs_4724a5c6ff99faf22dbaedea074a23b2/node_modules/vinext/dist/shims/layout-segment-context.js": {
+    "file": "_next/static/chunks/layout-segment-context-DUYgFqJB.js",
+    "name": "layout-segment-context",
+    "src": "node_modules/.pnpm/vinext@1.0.0-beta.2_@vitejs_4724a5c6ff99faf22dbaedea074a23b2/node_modules/vinext/dist/shims/layout-segment-context.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-BgSIrAUN.js"
+    ]
+  },
+  "virtual:vinext-app-browser-entry": {
+    "file": "_next/static/chunks/index-C2THAlDY.js",
+    "name": "index",
+    "src": "virtual:vinext-app-browser-entry",
+    "isEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_framework-BgSIrAUN.js"
+    ],
+    "dynamicImports": [
+      "virtual:vinext-app-browser-entry",
+      "app/dashboard/conversations/page.tsx",
+      "app/dashboard/calendar/page.tsx",
+      "app/dashboard/contacts/page.tsx",
+      "app/dashboard/reports/page.tsx",
+      "app/HomeClient.tsx",
+      "app/dashboard/admin/AdminDashboard.tsx",
+      "app/dashboard/ai/page.tsx",
+      "app/dashboard/profile/page.tsx",
+      "node_modules/.pnpm/vinext@1.0.0-beta.2_@vitejs_4724a5c6ff99faf22dbaedea074a23b2/node_modules/vinext/dist/shims/layout-segment-context.js",
+      "app/dashboard/page.tsx"
+    ]
+  }
+}
