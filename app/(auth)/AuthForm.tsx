@@ -134,7 +134,7 @@ export function AuthForm({ mode, redirectTo, initialError = "" }: Props) {
   return (
     <main className="auth-page">
       <header className="auth-topbar">
-        <Link href="/" className="auth-brand" aria-label="NOIRA — página inicial">
+        <Link href="/" prefetch={false} className="auth-brand" aria-label="NOIRA — página inicial">
           <Image src="/noira-logo.jfif" alt="" width={38} height={38} priority unoptimized />
           <span>NOIRA</span>
         </Link>
@@ -187,7 +187,7 @@ export function AuthForm({ mode, redirectTo, initialError = "" }: Props) {
                   </label>
                 )}
 
-                {mode === "login" && <Link className="auth-forgot" href="/recuperar-senha">Esqueci minha senha</Link>}
+                {mode === "login" && <Link className="auth-forgot" href="/recuperar-senha" prefetch={false}>Esqueci minha senha</Link>}
                 {error && <div className="auth-error" role="alert">{error}</div>}
                 <button className="auth-submit" type="submit" disabled={loading || !recoveryReady}>
                   {loading ? <><span className="auth-spinner" /> Aguarde…</> : current.submit}
@@ -196,9 +196,9 @@ export function AuthForm({ mode, redirectTo, initialError = "" }: Props) {
             )}
 
             <footer className="auth-card-footer">
-              {mode === "login" && <span>Ainda não tem uma conta? <Link href="/criar-conta">Criar conta</Link></span>}
-              {mode === "signup" && <span>Já possui uma conta? <Link href="/entrar">Entrar</Link></span>}
-              {(mode === "forgot" || mode === "reset") && <Link href="/entrar">Voltar para o login</Link>}
+              {mode === "login" && <span>Ainda não tem uma conta? <Link href="/criar-conta" prefetch={false}>Criar conta</Link></span>}
+              {mode === "signup" && <span>Já possui uma conta? <Link href="/entrar" prefetch={false}>Entrar</Link></span>}
+              {(mode === "forgot" || mode === "reset") && <Link href="/entrar" prefetch={false}>Voltar para o login</Link>}
             </footer>
           </form>
         </div>
