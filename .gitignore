@@ -42,3 +42,4 @@ yarn-error.log*
 /.pnpm-store/
 /.devserver.log
 /.devserver-error.log
+/.sites-runtime/

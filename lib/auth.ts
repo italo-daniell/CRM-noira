@@ -1,0 +1,42 @@
+export function safeRedirectPath(value: string | null | undefined, fallback = "/dashboard") {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) return fallback;
+  try {
+    const url = new URL(value, "https://noira.local");
+    if (url.origin !== "https://noira.local") return fallback;
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return fallback;
+  }
+}
+
+export function authErrorMessage(error: { code?: string; message?: string } | null) {
+  if (!error) return "Não foi possível concluir. Tente novamente.";
+  const code = error.code || "";
+  const message = (error.message || "").toLowerCase();
+
+  if (code === "invalid_credentials" || message.includes("invalid login credentials")) {
+    return "E-mail ou senha incorretos.";
+  }
+  if (code === "email_not_confirmed" || message.includes("email not confirmed")) {
+    return "Confirme seu e-mail antes de entrar.";
+  }
+  if (code === "user_already_exists" || message.includes("already registered")) {
+    return "Já existe uma conta com este e-mail.";
+  }
+  if (code === "weak_password" || message.includes("password should be")) {
+    return "Crie uma senha com pelo menos 8 caracteres.";
+  }
+  if (code === "over_email_send_rate_limit" || code === "over_request_rate_limit" || message.includes("rate limit")) {
+    return "Muitas tentativas seguidas. Aguarde um pouco e tente novamente.";
+  }
+  if (code === "same_password" || message.includes("different from the old password")) {
+    return "A nova senha deve ser diferente da senha atual.";
+  }
+  if (message.includes("expired") || message.includes("invalid token") || message.includes("pkce")) {
+    return "Este link expirou ou já foi usado. Solicite um novo link.";
+  }
+  if (message.includes("network") || message.includes("fetch")) {
+    return "Sem conexão com o serviço. Verifique sua internet e tente novamente.";
+  }
+  return "Não foi possível concluir. Revise os dados e tente novamente.";
+}

@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { DashboardSidebar } from "../DashboardSidebar";
 import "../dashboard.css";
 import "./profile.css";
+import { createClient } from "../../../lib/supabase/client";
 
 type Section="profile"|"workspace"|"chat"|"email"|"billing"|"users"|"ai"|"integrations";
 const menu:{group:string;items:{id:Section;label:string}[]}[]=[
@@ -25,6 +26,7 @@ export default function ProfilePage(){
   const [checks,setChecks]=useState<Record<string,boolean>>(()=>Object.fromEntries(noticeRows.flatMap(row=>["mail","mobile","browser"].map(channel=>[`${row}-${channel}`,true]))));
 
   function notify(message:string){setToast(message);window.setTimeout(()=>setToast(""),2600)}
+  async function signOut(){const supabase=createClient();await supabase.auth.signOut();window.location.assign("/entrar")}
   function save(event?:FormEvent){event?.preventDefault();setDirty(false);notify("Configurações salvas com sucesso.")}
   function changeAvatar(event:ChangeEvent<HTMLInputElement>){const file=event.target.files?.[0];if(file){setAvatar(URL.createObjectURL(file));setDirty(true)}}
   const title=menu.flatMap(group=>group.items).find(item=>item.id===section)?.label||"Configurações";
@@ -42,7 +44,7 @@ export default function ProfilePage(){
           <div className="profile-photo"><label>{avatar?<img src={avatar} alt="Foto do perfil"/>:<span>MS</span>}<i>◉</i><input type="file" accept="image/*" onChange={changeAvatar}/></label><small>Alterar foto</small></div>
           <div className="profile-fields">
             <div className="field-row identity"><label>ID do usuário</label><p>15823991 <button type="button" onClick={()=>{navigator.clipboard?.writeText("15823991");notify("ID copiado.")}}>▣</button></p></div>
-            <div className="field-row identity"><label>Entrar via</label><p><i className="google">G</i><b>Marina Silva</b><button type="button" className="logout" onClick={()=>notify("A opção de desconexão foi aberta.")}>⇥ Sair</button></p></div>
+            <div className="field-row identity"><label>Entrar via</label><p><i className="google">@</i><b>E-mail e senha</b><button type="button" className="logout" onClick={signOut}>⇥ Sair</button></p></div>
             <div className="field-row"><label htmlFor="language">Idioma</label><select id="language" defaultValue="pt-BR" onChange={()=>setDirty(true)}><option value="pt-BR">Português (Brasil)</option><option value="en">English</option><option value="es">Español</option></select></div>
             <div className="field-row"><label htmlFor="name">Nome</label><input id="name" defaultValue="Marina Silva" onChange={()=>setDirty(true)}/></div>
             <div className="field-row"><label htmlFor="phone">Telefone</label><input id="phone" defaultValue="+55 11 99999-0000" onChange={()=>setDirty(true)}/></div>
