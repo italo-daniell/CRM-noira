@@ -23,6 +23,9 @@ export function authErrorMessage(error: { code?: string; message?: string } | nu
   if (code === "user_already_exists" || message.includes("already registered")) {
     return "Já existe uma conta com este e-mail.";
   }
+  if (code === "email_address_not_authorized" || message.includes("email address not authorized")) {
+    return "O envio de confirmação ainda não está habilitado para este e-mail. Fale com o administrador da NOIRA.";
+  }
   if (code === "weak_password" || message.includes("password should be")) {
     return "Crie uma senha com pelo menos 8 caracteres.";
   }
