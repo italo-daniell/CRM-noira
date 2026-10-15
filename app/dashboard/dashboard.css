@@ -134,3 +134,47 @@ html[data-theme="light"] .mobile-nav-item.active{color:#fff}
 html[data-theme="light"] .mobile-nav-icon>b{border-color:#fff}
 .dash-account{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px}.dash-account .dash-user{min-width:0}.dash-signout{position:relative;width:36px;height:36px;border:1px solid transparent;border-radius:10px;background:transparent;color:#a9a2bd;display:grid;place-items:center;cursor:pointer}.dash-signout svg{width:18px;height:18px}.dash-signout>span{display:none}.dash-signout:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.12)}.dash-signout:disabled{opacity:.55;cursor:wait}.mobile-signout{width:100%;min-height:48px;border:0;border-radius:12px;background:transparent;color:inherit;display:flex;align-items:center;gap:14px;padding:0 14px;font:inherit;font-weight:800}.mobile-signout svg{width:21px}.mobile-signout:hover{background:rgba(118,71,245,.11)}
 @media(max-width:1100px){.dash-account{display:flex;flex-direction:column}.dash-signout{width:42px}.dash-account .dash-user{width:42px;padding:0;justify-content:center}.dash-account .dash-user>span{display:none}}
+
+/* Compact dashboard foundation for phones.
+   Keeps the page at the viewport width and turns the pipeline into a contained,
+   swipeable carousel instead of stretching the entire dashboard horizontally. */
+@media(max-width:650px){
+  .dash{height:100dvh;min-height:100dvh;overflow:hidden;background:#f3f4f7;display:block}
+  .dash-main{width:100%;max-width:520px;height:100dvh;margin:0 auto;padding:max(16px,env(safe-area-inset-top,0px)) 14px calc(var(--mobile-nav-space) + 18px);overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-gutter:stable}
+  .dash-main>header{display:grid;grid-template-columns:minmax(0,1fr);align-items:start;gap:0}
+  .dash-main>header small{font-size:9px;letter-spacing:.01em}
+  .dash-main h1{margin:4px 0 0;font-size:25px;line-height:1.1;letter-spacing:-.8px}
+  .dash-actions{width:100%;margin-top:15px;display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:8px}
+  .dash-actions button,.dash-actions button:not(.primary){display:inline-flex!important;min-width:0;min-height:44px;padding:0 9px;align-items:center;justify-content:center;border-radius:13px;font-size:10px!important;white-space:nowrap}
+  .dash-actions button:first-child:first-letter,.dash-actions button.primary:first-letter{font-size:inherit}
+  .dash-actions button.primary{box-shadow:0 9px 22px rgba(112,71,232,.22)}
+  .pipeline-tools{width:100%;margin-top:10px;border-radius:14px}
+  .pipeline-filters{grid-template-columns:1fr 1fr}
+  .pipeline-filters>label:last-of-type,.pipeline-filters>button{grid-column:1/-1}
+  .filter-summary{height:34px}
+  .dash-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0 16px}
+  .dash-stats article{min-width:0;min-height:102px;padding:14px;border-radius:16px;align-content:space-between;box-shadow:0 5px 18px rgba(28,19,52,.045)}
+  .dash-stats span{font-size:9px;line-height:1.25}
+  .dash-stats b{font-size:20px;line-height:1.05;letter-spacing:-.55px;overflow-wrap:anywhere}
+  .dash-stats small{font-size:8px;line-height:1.25}
+  .dash-board{width:100%;min-width:0;display:flex;gap:11px;padding:0 0 9px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:0;overscroll-behavior-x:contain;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .dash-board::-webkit-scrollbar{display:none}
+  .dash-col{flex:0 0 min(86vw,340px);min-width:0;min-height:0;height:max-content;padding:11px;border-radius:16px;scroll-snap-align:start;scroll-snap-stop:always}
+  .dash-col>header{min-height:34px;padding:2px 2px 9px}
+  .dash-col>header b{font-size:10px}
+  .dash-col>header i{min-width:22px;text-align:center;padding:3px 6px}
+  .dash-card{min-height:123px;margin-bottom:9px;padding:12px;border-radius:12px;gap:8px}
+  .dash-card:last-child{margin-bottom:0}
+  .pipeline-empty{min-height:150px}
+  .lead-modal form,.lead-modal.confirm>div{border-radius:18px}
+}
+@media(max-width:370px){
+  .dash-main{padding-inline:11px}
+  .dash-actions{grid-template-columns:1fr 1fr;gap:7px}
+  .dash-actions button.primary{grid-column:1/-1}
+  .dash-stats{gap:7px}
+  .dash-stats article{min-height:96px;padding:12px}
+  .dash-stats b{font-size:18px}
+  .dash-col{flex-basis:calc(100vw - 38px)}
+}
+html[data-theme="dark"] .dash{background:var(--noira-bg,#050507)}
