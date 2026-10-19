@@ -5,6 +5,7 @@ const PUBLIC_ROUTES = [
   "/",
   "/entrar",
   "/criar-conta",
+  "/confirmar-email",
   "/recuperar-senha",
   "/redefinir-senha",
   "/auth",
