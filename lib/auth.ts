@@ -38,8 +38,8 @@ export function authErrorMessage(error: { code?: string; message?: string } | nu
   if (message.includes("expired") || message.includes("invalid token") || message.includes("pkce")) {
     return "Este link expirou ou já foi usado. Solicite um novo link.";
   }
-  if (message.includes("network") || message.includes("fetch")) {
-    return "Sem conexão com o serviço. Verifique sua internet e tente novamente.";
+  if (code === "service_unavailable" || message.includes("network") || message.includes("fetch")) {
+    return "O serviço de autenticação está temporariamente indisponível. Tente novamente em instantes.";
   }
   return "Não foi possível concluir. Revise os dados e tente novamente.";
 }
