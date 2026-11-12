@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { Check, Eye, EyeOff, LockKeyhole, Mail, MailCheck, RotateCcw, ShieldCheck } from "lucide-react";
-import { authErrorMessage } from "../../lib/auth";
+import { authErrorMessage, safeRedirectPath } from "../../lib/auth";
 import { createClient } from "../../lib/supabase/client";
 import { ThemeToggle } from "../ThemeToggle";
 
@@ -20,7 +20,7 @@ const copy: Record<Mode, { eyebrow: string; title: string; description: string; 
   login: {
     eyebrow: "BEM-VINDO DE VOLTA",
     title: "Entre na sua conta",
-    description: "Acesse suas conversas, contatos e oportunidades em um só lugar.",
+    description: "Entre com seu e-mail e senha. O login não exige um novo e-mail a cada acesso.",
     submit: "Entrar",
   },
   signup: {
@@ -44,7 +44,7 @@ const copy: Record<Mode, { eyebrow: string; title: string; description: string; 
   confirm: {
     eyebrow: "CONFIRMAÇÃO DE E-MAIL",
     title: "Verifique sua caixa de entrada",
-    description: "Enviamos um link seguro para confirmar seu e-mail e liberar o acesso à NOIRA.",
+    description: "Se sua conta ainda estiver pendente, use o link de confirmação enviado ao seu e-mail. Confira também a pasta de spam.",
     submit: "Reenviar e-mail",
   },
 };
@@ -66,9 +66,24 @@ export function AuthForm({
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [recoveryReady, setRecoveryReady] = useState(mode !== "reset");
-  const [pendingEmail, setPendingEmail] = useState(() =>
-    typeof window === "undefined" ? "" : window.sessionStorage.getItem("noira:pending-email") || "",
-  );
+  const [pendingEmail, setPendingEmail] = useState("");
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const destination = safeRedirectPath(redirectTo);
+
+  useEffect(() => {
+    try { setPendingEmail(window.sessionStorage.getItem("noira:pending-email") || ""); } catch { /* Storage may be disabled. */ }
+  }, []);
+
+  useEffect(() => {
+    if (!resendCooldown) return;
+    const timer = window.setTimeout(() => setResendCooldown((seconds) => Math.max(0, seconds - 1)), 1000);
+    return () => window.clearTimeout(timer);
+  }, [resendCooldown]);
+
+  function rememberEmail(email: string) {
+    setPendingEmail(email);
+    try { window.sessionStorage.setItem("noira:pending-email", email); } catch { /* Do not block auth. */ }
+  }
   const [showConfirmationLink, setShowConfirmationLink] = useState(false);
   const current = copy[mode];
 
@@ -80,6 +95,8 @@ export function AuthForm({
       if (!active) return;
       setRecoveryReady(Boolean(data.session));
       if (!data.session) setError("Abra novamente o link seguro enviado ao seu e-mail.");
+    }).catch((caught) => {
+      if (active) setError(authErrorMessage(caught));
     });
     const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
       if (!active) return;
@@ -95,23 +112,29 @@ export function AuthForm({
   }, [mode]);
 
   async function resendConfirmation() {
-    if (loading) return;
-    if (!pendingEmail) {
+    if (loading || resendCooldown) return;
+    if (!/^\S+@\S+\.\S+$/.test(pendingEmail.trim())) {
       setError("Volte à criação de conta e informe seu e-mail novamente.");
       return;
     }
     setLoading(true);
     setError("");
     setSuccess("");
-    const callback = `${window.location.origin}/auth/callback?flow=signup&next=${encodeURIComponent(redirectTo)}`;
-    const { error: resendError } = await createClient().auth.resend({
-      type: "signup",
-      email: pendingEmail,
-      options: { emailRedirectTo: callback },
-    });
-    if (resendError) setError(authErrorMessage(resendError));
-    else setSuccess("Um novo e-mail de confirmação foi enviado. Confira também a pasta de spam.");
-    setLoading(false);
+    try {
+      const callback = `${window.location.origin}/auth/callback?flow=signup&next=${encodeURIComponent(destination)}`;
+      const { error: resendError } = await createClient().auth.resend({
+        type: "signup",
+        email: pendingEmail.trim().toLowerCase(),
+        options: { emailRedirectTo: callback },
+      });
+      if (resendError) throw resendError;
+      setSuccess("Solicitação recebida. Se a conta aguarda confirmação, confira seu e-mail e o spam. Se já confirmou, entre com sua senha.");
+      setResendCooldown(60);
+    } catch (caught) {
+      setError(authErrorMessage(caught as { code?: string; message?: string }));
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -129,7 +152,7 @@ export function AuthForm({
       setError("Informe um e-mail válido.");
       return;
     }
-    if ((mode === "login" || mode === "signup" || mode === "reset") && password.length < 8) {
+    if ((mode === "signup" || mode === "reset") && password.length < 8) {
       setError("A senha deve ter pelo menos 8 caracteres.");
       return;
     }
@@ -138,35 +161,46 @@ export function AuthForm({
       return;
     }
 
+    if (mode === "login" && !password) {
+      setError("Informe sua senha.");
+      return;
+    }
     setLoading(true);
-    const supabase = createClient();
     try {
+      const supabase = createClient();
       if (mode === "login") {
-        const { error: loginError } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error: loginError } = await supabase.auth.signInWithPassword({ email, password });
         if (loginError) throw loginError;
-        window.location.assign(redirectTo);
+        if (!data.session) throw { code: "service_unavailable" };
+        window.location.assign(destination);
         return;
       }
 
       if (mode === "signup") {
-        const callback = `${window.location.origin}/auth/callback?flow=signup&next=${encodeURIComponent(redirectTo)}`;
+        const callback = `${window.location.origin}/auth/callback?flow=signup&next=${encodeURIComponent(destination)}`;
         const { data, error: signupError } = await supabase.auth.signUp({
           email,
           password,
           options: { emailRedirectTo: callback },
         });
         if (signupError) throw signupError;
-        if (data.session) {
-          window.location.assign(redirectTo);
+        if (data.user?.identities?.length === 0) {
+          setError("Se você já possui conta, entre com sua senha ou use Esqueci minha senha. Para uma conta pendente, reenvie a confirmação.");
+          rememberEmail(email);
+          setShowConfirmationLink(true);
           return;
         }
-        window.sessionStorage.setItem("noira:pending-email", email);
-        window.location.assign(`/confirmar-email?estado=pendente&next=${encodeURIComponent(redirectTo)}`);
+        if (data.session) {
+          window.location.assign(destination);
+          return;
+        }
+        rememberEmail(email);
+        window.location.assign(`/confirmar-email?estado=pendente&next=${encodeURIComponent(destination)}`);
         return;
       }
 
       if (mode === "forgot") {
-        const callback = `${window.location.origin}/auth/callback?flow=recovery&next=${encodeURIComponent(redirectTo)}`;
+        const callback = `${window.location.origin}/auth/callback?flow=recovery&next=${encodeURIComponent(destination)}`;
         const { error: recoveryError } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: callback,
         });
@@ -178,12 +212,12 @@ export function AuthForm({
         const { error: resetError } = await supabase.auth.updateUser({ password });
         if (resetError) throw resetError;
         setSuccess("Senha alterada com sucesso. Redirecionando para sua conta…");
-        window.setTimeout(() => window.location.assign(redirectTo), 1200);
+        window.setTimeout(() => window.location.assign(destination), 1200);
       }
     } catch (caught) {
       const authError = caught as { code?: string; message?: string };
       if (mode === "login" && authError.code === "email_not_confirmed") {
-        window.sessionStorage.setItem("noira:pending-email", email);
+        rememberEmail(email);
         setPendingEmail(email);
         setShowConfirmationLink(true);
       }
@@ -233,7 +267,8 @@ export function AuthForm({
             ) : mode === "confirm" ? (
               <div className="auth-confirm-panel">
                 <span className="auth-confirm-icon"><MailCheck /></span>
-                <p className="auth-confirm-email">Link enviado para <b>{pendingEmail ? maskedEmail(pendingEmail) : "o e-mail cadastrado"}</b>.</p>
+                <p className="auth-confirm-email">Confirmação para <b>{pendingEmail ? maskedEmail(pendingEmail) : "o e-mail cadastrado"}</b>.</p>
+                <label className="auth-field"><span>E-mail da conta</span><div><Mail aria-hidden="true" /><input type="email" autoComplete="email" value={pendingEmail} onChange={(event) => setPendingEmail(event.target.value)} disabled={loading} /></div></label>
                 {success && (
                   <div className="auth-success" role="status">
                     <span><Check /></span>
@@ -241,8 +276,8 @@ export function AuthForm({
                   </div>
                 )}
                 {error && <div className="auth-error" role="alert">{error}</div>}
-                <button className="auth-submit" type="button" onClick={resendConfirmation} disabled={loading}>
-                  {loading ? <><span className="auth-spinner" /> Enviando…</> : <><RotateCcw /> Reenviar e-mail</>}
+                <button className="auth-submit" type="button" onClick={resendConfirmation} disabled={loading || resendCooldown > 0}>
+                  {loading ? <><span className="auth-spinner" /> Enviando…</> : <><RotateCcw /> {resendCooldown ? `Aguarde ${resendCooldown}s` : "Reenviar e-mail"}</>}
                 </button>
               </div>
             ) : success ? (
@@ -262,7 +297,7 @@ export function AuthForm({
                 {(mode === "login" || mode === "signup" || mode === "reset") && (
                   <label className="auth-field">
                     <span>{mode === "reset" ? "Nova senha" : "Senha"}</span>
-                    <div><LockKeyhole aria-hidden="true" /><input name="password" type={showPassword ? "text" : "password"} autoComplete={mode === "login" ? "current-password" : "new-password"} placeholder="Mínimo de 8 caracteres" disabled={loading || !recoveryReady} required /><button type="button" aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? <EyeOff /> : <Eye />}</button></div>
+                    <div><LockKeyhole aria-hidden="true" /><input name="password" type={showPassword ? "text" : "password"} autoComplete={mode === "login" ? "current-password" : "new-password"} placeholder={mode === "login" ? "Digite sua senha" : "Mínimo de 8 caracteres"} disabled={loading || !recoveryReady} required /><button type="button" aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? <EyeOff /> : <Eye />}</button></div>
                   </label>
                 )}
 
@@ -276,7 +311,7 @@ export function AuthForm({
                 {mode === "login" && <a className="auth-forgot" href="/recuperar-senha">Esqueci minha senha</a>}
                 {error && <div className="auth-error" role="alert">{error}</div>}
                 {showConfirmationLink && (
-                  <a className="auth-inline-action" href={`/confirmar-email?estado=pendente&next=${encodeURIComponent(redirectTo)}`}>
+                  <a className="auth-inline-action" href={`/confirmar-email?estado=pendente&next=${encodeURIComponent(destination)}`}>
                     Reenviar confirmação de e-mail
                   </a>
                 )}
@@ -290,7 +325,7 @@ export function AuthForm({
               {mode === "login" && <span>Ainda não tem uma conta? <a href="/criar-conta">Criar conta</a></span>}
               {mode === "signup" && <span>Já possui uma conta? <a href="/entrar">Entrar</a></span>}
               {(mode === "forgot" || mode === "reset") && <a href="/entrar">Voltar para o login</a>}
-              {mode === "confirm" && <span>Já confirmou? <a href={`/entrar?redirecionar=${encodeURIComponent(redirectTo)}`}>Entrar na conta</a></span>}
+              {mode === "confirm" && <span>Já confirmou? <a href={`/entrar?redirecionar=${encodeURIComponent(destination)}`}>Entrar na conta</a></span>}
             </footer>
           </form>
         </div>

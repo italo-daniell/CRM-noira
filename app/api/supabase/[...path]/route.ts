@@ -1,5 +1,4 @@
-const SUPABASE_ORIGIN = process.env.NEXT_PUBLIC_SUPABASE_URL
-  || "https://omzlxuzswxlixjjvexcx.supabase.co";
+import { projectUrl as SUPABASE_ORIGIN } from "../../../../lib/supabase/config";
 
 type RouteContext = {
   params: Promise<{ path: string[] }>;
@@ -24,6 +23,10 @@ async function proxyAuth(request: Request, context: RouteContext) {
     "referer",
     "content-length",
     "accept-encoding",
+    "oai-authenticated-user-id",
+    "oai-authenticated-user-email",
+    "oai-authenticated-user-full-name",
+    "oai-sites-authorization",
   ]) {
     headers.delete(name);
   }
@@ -36,6 +39,7 @@ async function proxyAuth(request: Request, context: RouteContext) {
         ? undefined
         : await request.arrayBuffer(),
       redirect: "manual",
+      signal: AbortSignal.timeout(8_000),
     });
 
     const responseHeaders = new Headers(upstream.headers);

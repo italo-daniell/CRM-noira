@@ -1,5 +1,7 @@
 "use client";
 
+import { useDeviceState } from "../../../lib/use-device-state";
+
 import { FormEvent, useMemo, useState } from "react";
 import { DashboardSidebar } from "../DashboardSidebar";
 import "../dashboard.css";
@@ -38,7 +40,7 @@ const baseContacts: Contact[] = [
 const statusClass: Record<Contact["status"], string> = { Cliente:"client", "Em negociação":"negotiation", Novo:"new", Inativo:"inactive" };
 
 export default function ContactsPage() {
-  const [contacts, setContacts] = useState(baseContacts);
+  const [contacts, setContacts] = useDeviceState("noira:contacts:v1", baseContacts);
   const [query, setQuery] = useState("");
   const [tab, setTab] = useState<"Contatos" | "Empresas">("Contatos");
   const [filter, setFilter] = useState("Todos");

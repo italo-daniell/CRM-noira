@@ -43,3 +43,6 @@ yarn-error.log*
 /.devserver.log
 /.devserver-error.log
 /.sites-runtime/
+
+# TypeScript incremental build output
+*.tsbuildinfo

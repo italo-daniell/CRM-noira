@@ -1,68 +1,43 @@
-# NOIRA CRM
+# NOIRA CRM — aplicativo
 
-Primeira experiência pública e protótipo navegável do NOIRA, um CRM com IA para empresas que vendem por WhatsApp, Instagram e formulários.
+Aplicativo web instalável (PWA) em Next.js, com código no GitHub e publicação na Vercel.
 
-## O que já existe
+## Acesso direto temporário
 
-- Landing page completa, responsiva e com identidade NOIRA.
-- Hero, apresentação do produto, recursos, IA, resultados, planos, CTA e rodapé.
-- Protótipo visual do CRM em `/dashboard`.
-- Pipeline, indicadores comerciais e painel do assistente NOIRA IA.
-- Menu mobile e seletor interativo de período dos planos.
-- Metadados de busca e imagem de compartilhamento.
+A página inicial e as antigas telas de entrada redirecionam para `/dashboard`.
+`DIRECT_ACCESS` em `lib/app-mode.ts` ativa esta experiência sem login. O código de autenticação Supabase permanece disponível para uma futura reativação; o cookie de sessão e o verificador PKCE usam a mesma configuração no navegador e no servidor.
 
-## Próxima fase: produto operacional
+O painel usa registros de exemplo. Leads, contatos, agenda e mensagens de teste são persistidos somente no navegador atual com chaves `noira:*:v1`. Não há sincronização entre dispositivos nem acesso anônimo aos registros de clientes no Supabase. As mensagens não são enviadas ao WhatsApp ou Instagram, e o assistente atual contém respostas demonstrativas.
 
-O painel atual é uma demonstração visual. Para transformar o NOIRA em um SaaS comercial, a implementação deve seguir esta ordem:
+A área administrativa continua exigindo autorização própria; o modo direto não concede privilégios administrativos nem altera políticas RLS.
 
-1. Contas, empresas, usuários, equipes e permissões.
-2. Contatos, empresas, negócios, etapas e campos personalizados.
-3. Pipeline com arrastar e soltar, filtros, busca e histórico.
-4. Caixa de entrada omnichannel com distribuição de conversas.
-5. Integração oficial com WhatsApp Cloud API e Instagram Messaging.
-6. Tarefas, agenda, lembretes e páginas de agendamento.
-7. Automações por gatilho, condição, espera e ação.
-8. Assistente de IA com contexto, aprovação humana e limites de uso.
-9. Relatórios de funil, origem, produtividade, receita e SLA.
-10. Assinaturas, cobrança, limites por plano e painel administrativo.
-11. Auditoria, consentimento, exportação e exclusão de dados para LGPD.
+## Instalar
 
-## Estrutura de dados recomendada
+Abra o aplicativo e use **Instalar NOIRA** no menu lateral ou no menu Mais do celular. Em navegadores compatíveis, confirme a instalação. No iOS, abra no Safari e use Compartilhar → Adicionar à Tela de Início. O manifesto inicia em `/dashboard` com janela independente.
 
-Entidades principais: `workspaces`, `users`, `memberships`, `contacts`, `companies`, `pipelines`, `stages`, `deals`, `channels`, `conversations`, `messages`, `tasks`, `appointments`, `automation_flows`, `automation_runs`, `ai_usage`, `subscriptions` e `audit_logs`.
+O service worker guarda apenas ícones e uma tela de reconexão. Telas do CRM, dados de clientes, APIs e sessões não são armazenados no cache do service worker. Para abrir outras telas, mantenha uma conexão de internet.
 
-Todo registro comercial deve pertencer a um `workspace`. Permissões, consultas e automações precisam respeitar esse isolamento desde o início.
-
-## Critérios para o MVP vendável
-
-- Um gestor consegue criar a conta e convidar a equipe.
-- Um vendedor consegue cadastrar, importar e movimentar leads.
-- Mensagens de WhatsApp chegam e são respondidas dentro da NOIRA.
-- Toda interação fica registrada na linha do tempo do contato.
-- Regras simples criam tarefas e movem negócios automaticamente.
-- A IA sugere respostas, mas ações externas sensíveis exigem confirmação.
-- O gestor enxerga conversão por etapa, vendedor e origem.
-- Cobrança, limites de plano, LGPD, logs e backups estão ativos.
-
-## Desenvolvimento local
-
-Requer Node.js 22 ou superior.
+## Desenvolvimento e validação
 
 ```bash
-pnpm install
-Copy-Item .env.example .env.local
+pnpm install --frozen-lockfile
 pnpm dev
+pnpm exec tsc --noEmit
+node --test tests/auth.test.mjs tests/app-mode.test.mjs
+pnpm build
 ```
 
-A página pública fica em `/` e o protótipo do CRM em `/dashboard`.
+## Vercel
 
-## Supabase e Vercel
+O repositório inclui `vercel.json`: framework Next.js e build `pnpm build`.
+Conecte `italo-daniell/CRM-noira` e use `main` como branch de produção.
 
-O projeto usa as variáveis `NEXT_PUBLIC_SUPABASE_URL` e
-`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Use somente a chave publicável no
-frontend; qualquer chave secreta deve permanecer em variáveis exclusivas do
-servidor.
+Variáveis públicas para a integração Supabase existente:
 
-Na Vercel, configure as variáveis para Production, Preview e Development. O
-build de produção usa Next.js nativo, permitindo deploy automático a cada push
-para o repositório GitHub conectado.
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `SITE_URL`: origem HTTPS definitiva da aplicação.
+
+Nunca configure a chave `service_role` em uma variável pública. O acesso direto ao painel não depende de uma sessão do Supabase e não concede leitura ou escrita anônima no banco.
+
+Antes de habilitar sincronização com dados reais, implemente contas ou sessões anônimas isoladas, vinculação do workspace, políticas RLS e autorização de cada operação. Para reativar o login, altere `DIRECT_ACCESS` para `false`, valide SMTP, URLs permitidas e recuperação de senha, e execute os testes de autenticação.

@@ -38,6 +38,12 @@ export function authErrorMessage(error: { code?: string; message?: string } | nu
   if (message.includes("expired") || message.includes("invalid token") || message.includes("pkce")) {
     return "Este link expirou ou já foi usado. Solicite um novo link.";
   }
+  if (code === "unexpected_failure" || message.includes("sending confirmation") || message.includes("sending recovery")) {
+    return "Não foi possível enviar o e-mail. Tente novamente mais tarde; se persistir, o administrador deve verificar o serviço de envio.";
+  }
+  if (message.includes("timeout") || message.includes("abort") || message.includes("lock")) {
+    return "A conexão demorou mais que o esperado. Tente novamente em instantes.";
+  }
   if (code === "service_unavailable" || message.includes("network") || message.includes("fetch")) {
     return "O serviço de autenticação está temporariamente indisponível. Tente novamente em instantes.";
   }

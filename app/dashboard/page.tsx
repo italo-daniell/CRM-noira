@@ -1,5 +1,7 @@
 "use client";
 
+import { useDeviceState } from "../../lib/use-device-state";
+
 import { FormEvent, useState } from "react";
 import { DashboardSidebar } from "./DashboardSidebar";
 import "./dashboard.css";
@@ -26,7 +28,7 @@ const initialLeads: Lead[] = [
 ];
 
 export default function Dashboard() {
-  const [leads,setLeads]=useState(initialLeads);
+  const [leads,setLeads]=useDeviceState("noira:leads:v1", initialLeads);
   const [menu,setMenu]=useState<number|null>(null);
   const [selected,setSelected]=useState<number|null>(null);
   const [editing,setEditing]=useState<number|null>(null);

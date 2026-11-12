@@ -1,5 +1,7 @@
 "use client";
 
+import { useDeviceState } from "../../../lib/use-device-state";
+
 import { FormEvent, useMemo, useState } from "react";
 import { DashboardSidebar } from "../DashboardSidebar";
 import "../dashboard.css";
@@ -38,7 +40,7 @@ export default function ConversationsPage() {
   const [mobileChat, setMobileChat] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
   const [closed, setClosed] = useState(false);
-  const [extraMessages, setExtraMessages] = useState<Record<string, Message[]>>({});
+  const [extraMessages, setExtraMessages] = useDeviceState<Record<string, Message[]>>("noira:messages:v1", {});
 
   const selected = conversations.find((item) => item.id === selectedId) ?? conversations[0];
   const visible = useMemo(() => conversations.filter((item) => {

@@ -1,0 +1,40 @@
+{
+  "id": "/",
+  "name": "NOIRA CRM",
+  "short_name": "NOIRA",
+  "description": "Seu CRM de conversas, contatos e oportunidades.",
+  "lang": "pt-BR",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f9",
+  "theme_color": "#17102f",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Contatos",
+      "url": "/dashboard/contacts"
+    },
+    {
+      "name": "Agenda",
+      "url": "/dashboard/calendar"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 "use client";
 
+import { useDeviceState } from "../../../lib/use-device-state";
+
 import { FormEvent, useMemo, useState } from "react";
 import { DashboardSidebar } from "../DashboardSidebar";
 import "../dashboard.css";
@@ -34,7 +36,7 @@ const timeSlots = Array.from({length:12},(_,index)=>index+8);
 const statusGroups: AgendaEvent["status"][] = ["Atrasada","Hoje","Amanhã","Esta semana"];
 
 export default function CalendarPage(){
-  const [events,setEvents]=useState(initialEvents);
+  const [events,setEvents]=useDeviceState("noira:agenda:v1", initialEvents);
   const [view,setView]=useState<View>("calendar");
   const [zoom,setZoom]=useState<Zoom>("Semana");
   const [owner,setOwner]=useState("Todos");
